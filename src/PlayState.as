@@ -15,7 +15,7 @@
 		protected var cameraPoint : FlxObject = null;
 		
 		override public function create():void
-		{
+		{	
 			bg = new FlxSprite(0, 0, BG);
 			bg.solid = false;
 			
@@ -24,12 +24,17 @@
 			player = new Player();
 			hoop = new Hoop();
 			
-			//cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
+			//Set World bounds. 
+			//TODO: Change this once we finalize the level design
+			FlxU.setWorldBounds(0, 0, 6400, 960);
+			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
 			add(bg);
 			add(ground);
 			add(player);
 			add(hoop);
+			
+			
 		}
 		
 		public override function update():void
