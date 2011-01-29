@@ -19,6 +19,7 @@
 		{
 			public static function complexHitTestObject( target1:FlxSprite, target2:FlxSprite,  accurracy:Number = 1 ):Boolean
 			{
+				//test
 				var bitmap1:Bitmap = flxspriteToBitmap(target1);
 				var bitmap2:Bitmap = flxspriteToBitmap(target2);
 				
