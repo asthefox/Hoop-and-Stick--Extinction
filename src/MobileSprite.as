@@ -69,6 +69,11 @@
 			return super.collide(Object);
 		}
 		
+		public function DetermineSlope(platform:Platform) : void
+		{
+			
+		}
+		
 		//This is some stuff from Justin's code.  Not using it now , but keeping it in case it's useful for the hoop sliding later.
 		public function slip(object:Platform):Boolean
 		{

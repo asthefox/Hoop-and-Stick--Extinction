@@ -34,10 +34,21 @@
 		
 		public override function update():void
 		{	
+			CheckGroundCollision();
+			CheckStickHit();
+			UpdateCamera();
+			
+			super.update();
+		}
+		
+		protected function CheckGroundCollision() : void
+		{
 			//Check for ground collision
 			player.collide(ground);
 			hoop.collide(ground);
-			
+		}
+		
+		protected function CheckStickHit() : void {
 			//Check for hoop and stick collision
 			//Is player swinging?
 			if (player.state == Player.STATE_SWING)
@@ -69,15 +80,15 @@
 					hoop.hit = true;
 				}
 			}
-			
-			
+		}
+		
+		protected function UpdateCamera():void
+		{
 			//cameraPoint.x = player1.x;
 			//cameraPoint.y = FlxG.height / 2;
 			//FlxG.follow(cameraPoint); 
 			//FlxG.followAdjust(0.0, 0.0); 
-			//FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);	
-			
-			super.update();
+			//FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);
 		}
 	}
 }

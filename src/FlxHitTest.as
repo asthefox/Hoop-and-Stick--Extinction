@@ -6,6 +6,7 @@
 		import flash.display.DisplayObject;
 		import flash.display.Sprite;
 		import org.flixel.FlxG;
+		import org.flixel.FlxGroup;
 		import org.flixel.FlxPoint;
 		import org.flixel.FlxSprite;
 		import org.flixel.FlxU;
@@ -17,6 +18,14 @@
 	 
 		public class FlxHitTest
 		{
+			//Flixel content
+			
+			public static function complexHitTestPoint( target1:FlxSprite, x:int, y:int):Boolean
+			{
+				var point:FlxSprite = new Pixel(x, y);
+				return complexHitTestObject(point, target1);
+			}
+			
 			public static function complexHitTestObject( target1:FlxSprite, target2:FlxSprite,  accurracy:Number = 1 ):Boolean
 			{
 				var bitmap1:Bitmap = flxspriteToBitmap(target1);
