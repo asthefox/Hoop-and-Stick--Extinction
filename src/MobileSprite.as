@@ -50,6 +50,8 @@
 				//Yes
 				var ObjectPP : Platform = Object as Platform;
 				
+				if(this is Player) DetermineSlope(ObjectPP);
+				
 				if (FlxHitTest.complexHitTestObject(this, ObjectPP))
 				{
 					onFloor = true;
@@ -64,6 +66,8 @@
 					}
 					return true;
 				}
+				
+				return false;
 			}
 			
 			return super.collide(Object);
@@ -71,6 +75,25 @@
 		
 		public function DetermineSlope(platform:Platform) : void
 		{
+			var x1 : int = x;
+			var x2 : int = x + width;
+			var y1 : int = y + height;
+			var dy1 : int = 0;
+			var dy2 : int = 0;
+			
+			for (dy1 = -10; dy1 < 10; dy1++)
+			{
+				if (FlxHitTest.complexHitTestPoint(platform, x1, y1+dy1)) break;
+			}
+			
+			for (dy2 = -10; dy2 < 10; dy2++)
+			{
+				if (FlxHitTest.complexHitTestPoint(platform, x2, y1+dy2)) break;
+			}
+			
+			var slope:Number = (dy1 - dy2) / (x2 - x1);
+			
+			if(this is Player) FlxG.log("y1 = " + dy1 + "; y2= " + dy2 + "slope = " + slope);
 			
 		}
 		
