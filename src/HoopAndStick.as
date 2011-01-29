@@ -9,7 +9,7 @@
 		
 		public function HoopAndStick() 
 		{
-			super(320, 240, PlayState, 2);
+			super(640, 480, PlayState, 1);
 		}
 		
 	}

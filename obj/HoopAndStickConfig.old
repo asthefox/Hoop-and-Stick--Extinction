@@ -11,7 +11,7 @@
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\src\Main.as</path-element>
+    <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
