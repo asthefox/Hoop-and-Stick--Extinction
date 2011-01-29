@@ -19,7 +19,7 @@
 			bg = new FlxSprite(0, 0, BG);
 			bg.solid = false;
 			
-			ground = new FlxSpritePP(0, 0, true, Ground);
+			ground = new Platform(0, 0, Ground);
 			
 			player = new Player();
 			
@@ -32,7 +32,7 @@
 		
 		public override function update():void
 		{	
-			if (ground.collide(player))
+			if (player.collide(ground))
 			{
 				player.hitBottom(ground, -10);
 				ground.hitTop(player, 0);

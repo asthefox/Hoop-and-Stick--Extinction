@@ -85,7 +85,7 @@ package org.flixel
 		protected var _flashRect2:Rectangle;
 		protected var _flashPointZero:Point;
 		protected var _pixels:BitmapData;
-		protected var _framePixels:BitmapData;
+		public var _framePixels:BitmapData;
 		protected var _alpha:Number;
 		protected var _color:uint;
 		protected var _ct:ColorTransform;

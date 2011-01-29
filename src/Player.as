@@ -1,8 +1,16 @@
 ﻿package  
 {
+	import flash.geom.Rectangle;
 	import org.flixel.*;
 	
-	public class Player extends FlxSpritePP
+	/////
+	//
+	//	This is the player character, or Boy With Stick (the hoop is a separate sprite).
+	//	Since it extends MobileSprite, it uses pixel-level hit detection when colliding with platforms.
+	//	This class contains the state system for player movement, along with the player input and animation.
+	//
+	/////
+	public class Player extends MobileSprite
 	{
 		//Flixel content
 		[Embed(source = "../content/boy.png")] protected var PlayerImage:Class;
@@ -38,7 +46,7 @@
 		
 		public function Player()
 		{
-			super(PLAYER_START_X, PLAYER_START_Y, true);
+			super(PLAYER_START_X, PLAYER_START_Y);
 			loadGraphic(PlayerImage, true, true, 48, 48);
 			
 			//Setting animations
@@ -60,59 +68,29 @@
 		
 		public override function update():void
 		{	
-			//Checking input for stick hitting
-			if (FlxG.keys.justPressed(BUTTON_STICK_UP))
-			{
-				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
-				{
-					state = STATE_SWING;
-					stickDir = UP;
-				}
-			}
-			if (FlxG.keys.justPressed(BUTTON_STICK_DOWN))
-			{
-				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
-				{
-					state = STATE_SWING;
-					stickDir = DOWN;
-				}
-			}
-			if (FlxG.keys.justPressed(BUTTON_STICK_LEFT))
-			{
-				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
-				{
-					state = STATE_SWING;
-					stickDir = LEFT;
-				}
-			}
-			if (FlxG.keys.justPressed(BUTTON_STICK_RIGHT))
-			{
-				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
-				{
-					state = STATE_SWING;
-					stickDir = RIGHT;
-				}
-			}
-			
 			//Jumping/Falling/Landing state machine
 			if (FlxG.keys.justPressed(BUTTON_JUMP) && state == STATE_GROUND) {
 				//Jump!
 				//FlxG.play(SndJump);
 				velocity.y = -JUMP_ACCELERATION;
 				state = STATE_JUMP;
+				onFloor = false;
 			}
-			else if (!velocity.y && (state != STATE_GROUND))
+			else if (onFloor && (state != STATE_GROUND))
 			{
 				//Land!
 				//FlxG.play(SndLand, 0.8);
 				state = STATE_GROUND;
-				acceleration.y = GRAVITY_ACCELERATION;
 			}
-			else if (state == STATE_GROUND && velocity.y != 0)
+			else if (state == STATE_GROUND && !onFloor)
 			{
 				//Fall!
 				state = STATE_FALL;
 			}
+			
+			//Kills vertical speed when on floor, necessary to prevent jitteriness
+			acceleration.y = onFloor ? 0 : GRAVITY_ACCELERATION;
+			velocity.y = onFloor ? 0 : velocity.y;
 			
 			
 			//Handle movement for jumping state
@@ -152,6 +130,40 @@
 				}
 			}
 			
+			//Checking input for stick hitting
+			if (FlxG.keys.justPressed(BUTTON_STICK_UP))
+			{
+				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
+				{
+					state = STATE_SWING;
+					stickDir = UP;
+				}
+			}
+			if (FlxG.keys.justPressed(BUTTON_STICK_DOWN))
+			{
+				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
+				{
+					state = STATE_SWING;
+					stickDir = DOWN;
+				}
+			}
+			if (FlxG.keys.justPressed(BUTTON_STICK_LEFT))
+			{
+				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
+				{
+					state = STATE_SWING;
+					stickDir = LEFT;
+				}
+			}
+			if (FlxG.keys.justPressed(BUTTON_STICK_RIGHT))
+			{
+				if (state == STATE_JUMP || state == STATE_FALL || state == STATE_GROUND)
+				{
+					state = STATE_SWING;
+					stickDir = RIGHT;
+				}
+			}
+			
 			//Update animation based on state
 			if (state == STATE_JUMP) {
 				play("jump");
@@ -170,6 +182,8 @@
 			super.update();
 		}
 		
+		// This is called automatically when an animation is over.
+		// It can tell the Player to automatically go back to a standing state after completing the stick swing animation.
 		public function AnimationHandler(_name:String, _fnum:uint, _fint:uint) : void
 		{
 			if (state == STATE_SWING && (_name == "swing"))// && (_fnum == 2))
