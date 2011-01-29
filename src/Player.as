@@ -27,11 +27,14 @@
 		
 		//Tweakable movement/physics variables
 		protected static const PLAYER_RUN_SPEED:int = 100;
-		protected static const GRAVITY_ACCELERATION:Number = 820;
 		protected static const JUMP_ACCELERATION:Number = 330;
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
 		protected var PLAYER_START_X:int = 100;
 		protected var PLAYER_START_Y:int = 100;
+		
+		public static const HORIZONTAL_HIT_FORCE:Number = 50;
+		public static const VERTICAL_HIT_FORCE:Number = 200;
+		public static const VERTICAL_HIT_DAMPEN:Number = 0.5;
 		
 		//State Machine!
 		public static const STATE_GROUND:int = 0;
@@ -43,6 +46,7 @@
 		//Other player variables
 		public var state : int = 0;			// State to keep track of how movement and input should work
 		public var stickDir : int = 0;		// Current direction that you're hitting the hoop in
+		public static const NONE : int = -1;
 		
 		public function Player()
 		{
@@ -54,7 +58,7 @@
 			addAnimation("run", [0, 0, 0, 0], 10); 
 			addAnimation("jump", [0]);
 			addAnimation("fall", [0]);
-			addAnimation("swing", [0]);
+			addAnimation("swing", [0, 0, 0], 10);
 			addAnimation("stun", [0]);
 			addAnimationCallback(AnimationHandler);
 			
@@ -68,6 +72,8 @@
 		
 		public override function update():void
 		{	
+			
+			
 			//Jumping/Falling/Landing state machine
 			if (FlxG.keys.justPressed(BUTTON_JUMP) && state == STATE_GROUND) {
 				//Jump!
@@ -87,11 +93,6 @@
 				//Fall!
 				state = STATE_FALL;
 			}
-			
-			//Kills vertical speed when on floor, necessary to prevent jitteriness
-			acceleration.y = onFloor ? 0 : GRAVITY_ACCELERATION;
-			velocity.y = onFloor ? 0 : velocity.y;
-			
 			
 			//Handle movement for jumping state
 			if (state == STATE_JUMP)
@@ -164,6 +165,9 @@
 				}
 			}
 			
+			if (state == STATE_SWING) FlxG.log("Swinging");
+			
+			
 			//Update animation based on state
 			if (state == STATE_JUMP) {
 				play("jump");
@@ -186,7 +190,7 @@
 		// It can tell the Player to automatically go back to a standing state after completing the stick swing animation.
 		public function AnimationHandler(_name:String, _fnum:uint, _fint:uint) : void
 		{
-			if (state == STATE_SWING && (_name == "swing"))// && (_fnum == 2))
+			if (state == STATE_SWING && (_name == "swing") && (_fnum == 2))
 			{
 				state = STATE_GROUND;
 			}

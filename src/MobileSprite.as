@@ -15,9 +15,20 @@
 	public class MobileSprite extends FlxSprite
 	{
 		
+		protected static const GRAVITY_ACCELERATION:Number = 820;
+		
 		public function MobileSprite(X:Number=0,Y:Number=0, SimpleGraphic:Class=null)
 		{
 			super(X, Y, SimpleGraphic);
+		}
+		
+		public override function update():void
+		{
+			//Kills vertical speed when on floor, necessary to prevent jitteriness
+			acceleration.y = onFloor ? 0 : GRAVITY_ACCELERATION;
+			velocity.y = onFloor ? 0 : velocity.y;
+			
+			super.update();
 		}
 		
 		
@@ -42,6 +53,8 @@
 				if (FlxHitTest.complexHitTestObject(this, ObjectPP))
 				{
 					onFloor = true;
+					hitBottom(ObjectPP, 0);
+					ObjectPP.hitTop(this, 0);
 					
 					//There's some jittery wonkiness with slopes - this smooths it out by adding a 2-pixel buffer zone					
 					var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
