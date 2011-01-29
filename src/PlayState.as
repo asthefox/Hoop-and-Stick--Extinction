@@ -10,8 +10,8 @@
 		
 		protected var bg : FlxSprite;
 		protected var ground : FlxSprite;
-		protected var player : FlxSprite;
-		protected var hoop : FlxSprite;
+		protected var player : Player;
+		protected var hoop : Hoop;
 		protected var cameraPoint : FlxObject = null;
 		
 		override public function create():void
@@ -19,24 +19,57 @@
 			bg = new FlxSprite(0, 0, BG);
 			bg.solid = false;
 			
-			ground = new FlxSpritePP(0, 0, true, Ground);
+			ground = new Platform(0, 0, Ground);
 			
 			player = new Player();
+			hoop = new Hoop();
 			
 			//cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
 			add(bg);
 			add(ground);
 			add(player);
+			add(hoop);
 		}
 		
 		public override function update():void
 		{	
-			if (ground.collide(player))
+			//Check for ground collision
+			player.collide(ground);
+			hoop.collide(ground);
+			
+			//Check for hoop and stick collision
+			//Is player swinging?
+			if (player.state == Player.STATE_SWING)
 			{
-				player.hitBottom(ground, -10);
-				ground.hitTop(player, 0);
+				//Has player hit hoop for the first time this swing?
+				if (player.stickDir != Player.NONE && FlxHitTest.complexHitTestObject(player, hoop))
+				{
+					switch(player.stickDir)
+					{
+						case FlxSprite.DOWN:
+							FlxG.log("hit down");
+							hoop.velocity.y *= Player.VERTICAL_HIT_DAMPEN;
+						break;
+						case FlxSprite.UP:
+							FlxG.log("hit up");
+							hoop.velocity.y = -1 * Player.VERTICAL_HIT_FORCE;
+						break;
+						case FlxSprite.LEFT:
+							FlxG.log("hit left");
+							hoop.velocity.x -= Player.HORIZONTAL_HIT_FORCE;
+						break;
+						case FlxSprite.RIGHT:
+							FlxG.log("hit right");
+							hoop.velocity.x += Player.HORIZONTAL_HIT_FORCE;
+						break;
+					}
+					
+					player.stickDir = Player.NONE;
+					hoop.hit = true;
+				}
 			}
+			
 			
 			//cameraPoint.x = player1.x;
 			//cameraPoint.y = FlxG.height / 2;
