@@ -13,6 +13,8 @@
 		protected var player : Player;
 		protected var hoop : Hoop;
 		protected var cameraPoint : FlxObject = null;
+		protected const CAMERA_LEAD_X : int = 30;
+		protected const CAMERA_LEAD_Y : int = 30;
 		
 		override public function create():void
 		{	
@@ -24,9 +26,9 @@
 			player = new Player();
 			hoop = new Hoop();
 			
-			//Set World bounds. 
+			//Set World bounds. NOTE: this is done in UpdateCamera now
 			//TODO: Change this once we finalize the level design
-			FlxU.setWorldBounds(0, 0, 6400, 960);
+			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
 			add(bg);
@@ -89,11 +91,24 @@
 		
 		protected function UpdateCamera():void
 		{
-			//cameraPoint.x = player1.x;
-			//cameraPoint.y = FlxG.height / 2;
-			//FlxG.follow(cameraPoint); 
-			//FlxG.followAdjust(0.0, 0.0); 
-			//FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);
+			cameraPoint.x = player.x;
+			cameraPoint.y = player.y - 50; //FlxG.height / 2;
+			
+			if (player.facing == FlxSprite.LEFT)
+			{
+				cameraPoint.x -= CAMERA_LEAD_X;
+				FlxG.log("facing left");
+			}
+			else if (player.facing == FlxSprite.RIGHT)
+			{
+				cameraPoint.x += CAMERA_LEAD_X;
+				FlxG.log("facing right");
+			}
+			
+			
+			FlxG.follow(player, 100);
+			//FlxG.followAdjust(0.5, 0); 
+			//FlxG.followBounds(0, 0, 6400, 960, true); //also sets world bounds
 		}
 	}
 }
