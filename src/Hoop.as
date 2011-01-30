@@ -34,7 +34,7 @@
 		public function Hoop(_X:int, _Y:int) 
 		{
 			super(_X, _Y);
-			loadGraphic(HoopImage, true, true, 80, 80);
+			loadGraphic(HoopImage, true, true, 80, 68);
 			
 			//Setting animations
 			addAnimation("roll", [0]);

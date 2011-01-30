@@ -69,7 +69,7 @@
 			maxVelocity.x = PLAYER_RUN_SPEED;
 			maxVelocity.y = JUMP_ACCELERATION;
 			acceleration.y = GRAVITY_ACCELERATION;
-			ground_buffer = 11;
+			ground_buffer = 17;
 
 			ROLL_ACCELERATION = 0;
 			FRICTION = 0;

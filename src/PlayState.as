@@ -6,10 +6,10 @@
 	{
 		//Embedding Flixel images into classes
 		
-		protected var level1 : Level;
+		public var level1 : Level;
 		
-		protected var player : Player;
-		protected var hoop : Hoop;
+		public var player : Player;
+		public var hoop : Hoop;
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
 		protected const CAMERA_LEAD_Y : int = 30;
@@ -33,11 +33,13 @@
 		
 		public override function update():void
 		{	
+			
 			CheckBowlingCollision();
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
+			UpdateShootingSituation();
 			UpdateCamera();
 			
 			CheckInput();
@@ -77,6 +79,30 @@
 			}
 		}
 		
+		protected function UpdateShootingSituation() : void
+		{
+			if (level1.shootingSituation.obstacle.exists)
+			{
+				level1.shootingSituation.activated = (player.x > level1.shootingSituation.x);
+				
+				//player-hoop-fire barrier
+				if (player.x > level1.shootingSituation.obstacle.x - 100)
+				{
+					player.x = level1.shootingSituation.obstacle.x - 100;
+				}
+				if (hoop.x > level1.shootingSituation.obstacle.x - 120)
+				{
+					hoop.x = level1.shootingSituation.obstacle.x - 120;
+				}
+			}
+			else
+			{
+				level1.shootingSituation.activated = false;
+			}
+		}
+
+		
+		
 		protected function CheckPoisonsCollision() : void
 		{
 			//Check for poison collision with Player
@@ -112,20 +138,69 @@
 		protected function CheckGroundCollision() : void
 		{
 			var playerOnPlatform : Boolean = false;
+			var hoopOnPlatform : Boolean = false;
+			player.supported = false;
 			
-			//Check for ground collision
+			
+			//Check for ground collision - player
 			for (var i : int = 0; i < level1.grounds.members.length; i++)
 			{
-				if(player.collide(level1.grounds.members[i])) playerOnPlatform = true;
-				hoop.collide(level1.grounds.members[i]);
-				level1.bowlingball.collide(level1.grounds.members[i]);
+				if (player.collide(level1.grounds.members[i]))
+				{
+					playerOnPlatform = true;
+					break;
+				}
 			}
 			
-			for (i = 0; i < level1.boxstacles.members.length; i++)
+			//Check for ground collision - hoop
+			for (i = 0; i < level1.grounds.members.length; i++)
 			{
-				if(player.collide(level1.boxstacleTops.members[i])) playerOnPlatform = true;
-				hoop.collide(level1.boxstacleTops.members[i]);
-
+				if (hoop.collide(level1.grounds.members[i]))
+				{
+					hoopOnPlatform = true;
+					break;
+				}
+			}
+			
+			//Check for ground collision - bowling ball
+			if (level1.bowlingball != null && level1.bowlingball.exists)
+			{
+				for (i = 0; i < level1.grounds.members.length; i++)
+				{
+					if (level1.bowlingball.collide(level1.grounds.members[i]))
+					{
+						break;
+					}
+				}
+			}
+			
+			if (!playerOnPlatform)
+			{
+				for (i = 0; i < level1.boxstacles.members.length; i++)
+				{
+					if (player.collide(level1.boxstacleTops.members[i]))
+					{
+						playerOnPlatform = true;
+						break;
+					}
+				}
+			}
+			
+			if (!hoopOnPlatform)
+			{
+				for (i = 0; i < level1.boxstacles.members.length; i++)
+				{
+					if (hoop.collide(level1.boxstacleTops.members[i]))
+					{
+						hoopOnPlatform = true;
+						break;
+					}
+				}
+			}
+			
+			
+			for (i = 0; i < level1.boxstacles.members.length; i++)	
+			{
 				FlxU.solveXCollision(hoop,level1.boxstacles.members[i]);
 				FlxU.solveYCollision(hoop, level1.boxstacles.members[i]);
 				
@@ -133,13 +208,14 @@
 				FlxU.solveYCollision(player,level1.boxstacles.members[i]);
 			}
 			
-			if (!playerOnPlatform)
+			if (!playerOnPlatform && !player.supported) 
 			{
-			//	if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
-			//{
-				//FlxG.log("Fall!");
 				player.Fall();
-			//}
+			}
+			
+			if (!hoopOnPlatform && !hoop.supported) 
+			{
+				hoop.Fall();
 			}
 		}
 		
