@@ -48,6 +48,42 @@
 			var spikes2: FlxSprite = new FlxSprite(640 * 4 + 350, 1310, Spikes);
 			spikes.add(spikes2);
 			
+			PlacePoisons();
+			PlaceGrounds();
+			
+			boxstacles = new FlxGroup();
+			boxstacleTops = new FlxGroup();
+			
+			var box01 : Boxstacle = new Boxstacle(100, 1280);
+			var boxTop01 : BoxstacleTop = new BoxstacleTop(100, 1280);
+			boxstacles.add(box01);
+			boxstacleTops.add(boxTop01);
+			
+			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
+			
+			AddElements();
+		}
+		
+		public function AddElements() : void
+		{
+			FlxG.state.add(sky);
+			FlxG.state.add(grounds);
+			FlxG.state.add(boxstacles);
+			FlxG.state.add(boxstacleTops);
+			FlxG.state.add(spikes);
+			FlxG.state.add(grounds);
+			FlxG.state.add(poisons);
+			
+			//FlxG.state.add(wrapper);
+		}
+		
+		public function update() : void
+		{
+			poisons1.play("PlayAnimation");
+		}
+		
+		public function PlacePoisons() : void
+		{
 			poisons = new FlxGroup();
 			//loadGraphic(Poison, true, true, 50, 100);
 			
@@ -73,48 +109,9 @@
 				poisons1.addAnimation("PoisonAnimation", [0,1,2],3);
 				poisons.add(poisons1);
 			}
-			
-			SetupGrounds();
-			
-			boxstacles = new FlxGroup();
-			boxstacleTops = new FlxGroup();
-			
-			var box01 : Boxstacle = new Boxstacle(100, 1280);
-			var boxTop01 : BoxstacleTop = new BoxstacleTop(100, 1280);
-			boxstacles.add(box01);
-			boxstacleTops.add(boxTop01);
-			
-			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
-			
-			AddElements();
-			
 		}
 		
-		public function AddElements() : void
-		{
-			FlxG.state.add(sky);
-			
-			FlxG.state.add(grounds);
-			
-			FlxG.state.add(boxstacles);
-			
-			FlxG.state.add(boxstacleTops);
-			
-			FlxG.state.add(spikes);
-			
-			FlxG.state.add(grounds);
-			FlxG.state.add(poisons);
-			
-			//FlxG.state.add(wrapper);
-		}
-		
-		public function update() : void
-		{
-			//FlxG.log("" + grounds.members[0].facing);
-			poisons1.play("PlayAnimation");
-		}
-		
-		public function SetupGrounds() : void
+		public function PlaceGrounds() : void
 		{
 			grounds = new FlxGroup();
 			
