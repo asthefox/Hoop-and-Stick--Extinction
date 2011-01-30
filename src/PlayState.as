@@ -28,13 +28,12 @@
 			
 			
 			add(player);
-			add(hoop);
-			
-			
+			add(hoop);			
 		}
 		
 		public override function update():void
 		{	
+			CheckBowlingCollision();
 			CheckGroundCollision();
 			CheckBoxCollision();
 			CheckStickHit();
@@ -43,6 +42,15 @@
 			UpdateCamera();
 			
 			super.update();
+		}
+		
+		protected function CheckBowlingCollision() : void
+		{
+			if (FlxU.solveXCollision(hoop,level1.bowlingball))
+			{
+				level1.bowlingball.hit = true;
+				FlxG.log("hit");
+			}
 		}
 		
 		protected function CheckPoisonsCollision() : void
@@ -92,6 +100,7 @@
 			{
 				player.collide(level1.grounds.members[i]);
 				hoop.collide(level1.grounds.members[i]);
+				level1.bowlingball.collide(level1.grounds.members[i]);
 			}
 		}
 		
