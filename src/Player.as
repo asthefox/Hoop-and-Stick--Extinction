@@ -50,8 +50,8 @@
 		
 		public function Player(_X:int, _Y:int)
 		{
-			super(_X,_Y);
-			loadGraphic(PlayerImage, true, true, 48, 48);
+			super(_X, _Y);
+			loadGraphic(PlayerImage, true, true, 50, 100);
 			
 			//Setting animations
 			addAnimation("idle", [0]);
