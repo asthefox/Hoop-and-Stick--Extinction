@@ -3,7 +3,7 @@
 	import org.flixel.FlxSprite;
 	public class Boxstacle extends FlxSprite
 	{
-		[Embed(source = "../content/crate_bottom.png")] protected var PixelImage:Class;
+		[Embed(source = "../content/scaffold_bottom.png")] protected var PixelImage:Class;
 			
 		public function Boxstacle(X:int, Y:int) 
 		{
