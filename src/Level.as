@@ -33,6 +33,8 @@
 		public var spikes: FlxGroup;
 		
 		private var poisons1: FlxSprite;
+		private var box01 : Boxstacle;
+		private var boxTop01 : BoxstacleTop; 
 		
 		public var boxstacles : FlxGroup;
 		public var boxstacleTops : FlxGroup;
@@ -104,10 +106,38 @@
 			boxstacles = new FlxGroup();
 			boxstacleTops = new FlxGroup();
 			
-			var box01 : Boxstacle = new Boxstacle(100, 1280);
-			var boxTop01 : BoxstacleTop = new BoxstacleTop(100, 1280);
-			boxstacles.add(box01);
-			boxstacleTops.add(boxTop01);
+			
+			
+			for (var i : int = 0; i < 15; i++)
+			{
+				if (i == 0) {
+					box01 = new Boxstacle(700, 1280);
+					boxTop01  = new BoxstacleTop(700, 1280);
+					//poisons1 = new FlxSprite(640 * 1 + 205, 1250);
+				}
+				else if (i == 1) {
+					box01 = new Boxstacle(880, 1180);
+					boxTop01  = new BoxstacleTop(880, 1180);
+				}
+				else if (i == 2) {
+					box01 = new Boxstacle(1670, 1280);
+					boxTop01  = new BoxstacleTop(1670, 1280);
+				}
+				else if (i == 3) {
+					box01 = new Boxstacle(1850, 1180);
+					boxTop01  = new BoxstacleTop(1850, 1180);
+				}
+				else if (i == 4) {
+					box01 = new Boxstacle(2030, 1180);
+					boxTop01  = new BoxstacleTop(2030, 1180);
+				}
+				
+				boxstacles.add(box01);
+				boxstacleTops.add(boxTop01);
+			}
+			
+
+
 			
 			wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
 			
