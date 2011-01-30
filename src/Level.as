@@ -24,7 +24,7 @@
 		public var sky : FlxSprite;
 		public var grounds : FlxGroup;
 		
-		public var wrapper : WrappingSprite;
+		//public var wrapper : WrappingSprite;
 		
 		public function Level() 
 		{
@@ -33,6 +33,30 @@
 			sky.scrollFactor.x = 0;
 			sky.solid = false;
 			
+			SetupGround();
+			
+			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
+			
+			
+			AddElements();
+			
+		}
+		
+		public function AddElements() : void
+		{
+			FlxG.state.add(sky);
+			FlxG.state.add(grounds);
+			
+			//FlxG.state.add(wrapper);
+		}
+		
+		public function update() : void
+		{
+			//FlxG.log("" + grounds.members[0].facing);
+		}
+		
+		private function SetupGround() : void
+		{
 			grounds = new FlxGroup();
 			
 			var ground1 : Platform = new Platform(0 + 640*0, 1198, Ground1);
@@ -55,28 +79,7 @@
 			grounds.add(ground9);
 			var ground10 : Platform = new Platform(0 + 640*9, 1198, Ground10);
 			grounds.add(ground10);
-			
-			wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
-			
-			
-			AddElements();
-			
 		}
-		
-		public function AddElements() : void
-		{
-			FlxG.state.add(sky);
-			FlxG.state.add(grounds);
-			
-			FlxG.state.add(wrapper);
-		}
-		
-		public function update() : void
-		{
-			//FlxG.log("" + grounds.members[0].facing);
-		}
-		
-		
 	}
 
 }
