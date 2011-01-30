@@ -87,7 +87,7 @@
 			mainBody.solid = false;
 			
 			weakPoint = new FlxSprite(100,60);
-			weakPoint.createGraphic(100, 20, 0xffff0088);
+			weakPoint.createGraphic(100, 30, 0xffff0088);
 			weakPoint.visible = false;
 			weakPoint.solid = true;
 			add(weakPoint);

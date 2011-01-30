@@ -13,7 +13,6 @@
 		public static const ENDING : int = 3;
 		public static const CREDIT : int = 4; 
 		
->>>>>>> b84be84ab6988e6cdb655a20c0726af493e3bf06
 		
 		public static var StateTypes : Array;
 		public static var StatePointer : int = 0;
@@ -34,7 +33,6 @@
 
 			StateTypes[ENDING] = EndingState;
 			StateTypes[CREDIT] = CreditsState;
->>>>>>> b84be84ab6988e6cdb655a20c0726af493e3bf06
 		}
 		
 		public static function ResetGame() : void
