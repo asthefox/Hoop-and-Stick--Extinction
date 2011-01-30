@@ -84,10 +84,12 @@
 			}
 			*/
 			
+			/*
 			if (state == STATE_AIR) FlxG.log("In air");
 			else if (state == STATE_FALL) FlxG.log("Falling");
 			else if (state == STATE_GROUND) FlxG.log("On Ground");
 			else if (state == STATE_TIP) FlxG.log("Tipping");
+			*/
 			
 			// Handle Animation
 			if (state == STATE_GROUND && angularVelocity == 0) {

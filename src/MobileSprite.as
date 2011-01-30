@@ -68,31 +68,34 @@
 		
 		public override function collide(Object:FlxObject=null):Boolean
 		{
-			//Is pixel-perfect collision required (e.g. are you colliding with a platform)?
+			//Are you colliding with a platform?
 			if (Object != null && Object is Platform && (Object as Platform).pixelPerfect)
 			{
-				//Yes
 				var ObjectPP : Platform = Object as Platform;
 				
-				if(ROLL_ACCELERATION != 0) DetermineSlope(ObjectPP);
-				
-				if(FlxHitTest.complexHitTestPoint(ObjectPP, this.x+width/2, this.y+height-Math.floor(ground_buffer/2)))
+				//Are you in range to require pixel-perfect collision?
+				if (x < ObjectPP.x + ObjectPP.width &&
+					x + width > ObjectPP.x)
 				{
-					onFloor = true;
-					hitBottom(ObjectPP, 0);
-					ObjectPP.hitTop(this, 0);
+					if(ROLL_ACCELERATION != 0) DetermineSlope(ObjectPP);
 					
-					
-					
-					//There's some jittery wonkiness with slopes - this smooths it out by adding a 2-pixel buffer zone					
-					var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
-					if (hitArea.y > ground_buffer)
+					if(FlxHitTest.complexHitTestPoint(ObjectPP, this.x+width/2, this.y+height-Math.floor(ground_buffer/2)))
 					{
-						y -= hitArea.height - Math.ceil(ground_buffer/2);
+						onFloor = true;
+						hitBottom(ObjectPP, 0);
+						ObjectPP.hitTop(this, 0);
+						
+						
+						
+						//There's some jittery wonkiness with slopes - this smooths it out by adding a 2-pixel buffer zone					
+						var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
+						if (hitArea.y > ground_buffer)
+						{
+							y -= hitArea.height - Math.ceil(ground_buffer/2);
+						}
+						return true;
 					}
-					return true;
 				}
-				
 				return false;
 			}
 			
