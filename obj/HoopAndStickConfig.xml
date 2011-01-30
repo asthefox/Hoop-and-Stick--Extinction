@@ -4,8 +4,19 @@
 <flex-config>
   <target-player>10.0.0</target-player>
   <compiler>
+    <define append="true">
+      <name>CONFIG::debug</name>
+      <value>true</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::release</name>
+      <value>false</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::timeStamp</name>
+      <value>'1/30/2011'</value>
+    </define>
     <source-path append="true">
-<<<<<<< HEAD
       <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\src</path-element>
       <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\flixel</path-element>
       <path-element>C:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
@@ -13,15 +24,6 @@
   </compiler>
   <file-specs>
     <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
-=======
-      <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\src</path-element>
-      <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\flixel</path-element>
-      <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
-    </source-path>
-  </compiler>
-  <file-specs>
-    <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
->>>>>>> 8da680e2bd2557c8e86bb3b3bf3d00b437d9beb7
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
