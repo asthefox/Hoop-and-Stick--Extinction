@@ -13,7 +13,7 @@
 	public class Player extends MobileSprite
 	{
 		//Flixel content
-		[Embed(source = "../content/boy.png")] protected var PlayerImage:Class;
+		[Embed(source = "../content/PlayerAnim2.png")] protected var PlayerImage:Class;
 		
 		//Input buttons
 		protected var BUTTON_JUMP:String = "W";
@@ -54,11 +54,11 @@
 			loadGraphic(PlayerImage, true, true, 50, 100);
 			
 			//Setting animations
-			addAnimation("idle", [0]);
-			addAnimation("run", [0, 1, 2, 3, 4], 5); 
-			addAnimation("jump", [0]);
+			addAnimation("idle", [6]);
+			addAnimation("run", [0, 1, 2, 3, 4, 5], 5); 
+			addAnimation("jump", [7]);
 			addAnimation("fall", [0]);
-			addAnimation("swing", [0, 0, 0], 10);
+			addAnimation("swing", [8, 9, 10, 10, 0], 5);
 			addAnimation("stun", [0]);
 			addAnimationCallback(AnimationHandler);
 			
@@ -68,14 +68,14 @@
 			maxVelocity.x = PLAYER_RUN_SPEED;
 			maxVelocity.y = JUMP_ACCELERATION;
 			acceleration.y = GRAVITY_ACCELERATION;
-			ground_buffer = 11;
+			ground_buffer = 0;
 
 			ROLL_ACCELERATION = 0;
 			FRICTION = 0;
 		}
 		
 		public override function update():void
-		{	
+		{		
 			//Jumping/Falling/Landing state machine
 			if (FlxG.keys.justPressed(BUTTON_JUMP) && state == STATE_GROUND) {
 				//Jump!
@@ -84,7 +84,7 @@
 				state = STATE_JUMP;
 				onFloor = false;
 			}
-			else if (onFloor && (state != STATE_GROUND))
+			else if (onFloor && (state != STATE_GROUND) && (state != STATE_SWING))
 			{
 				//Land!
 				//FlxG.play(SndLand, 0.8);
@@ -197,7 +197,7 @@
 		// It can tell the Player to automatically go back to a standing state after completing the stick swing animation.
 		public function AnimationHandler(_name:String, _fnum:uint, _fint:uint) : void
 		{
-			if (state == STATE_SWING && (_name == "swing") && (_fnum == 2))
+			if (state == STATE_SWING && (_name == "swing") && (_fnum == 3))
 			{
 				state = STATE_GROUND;
 			}

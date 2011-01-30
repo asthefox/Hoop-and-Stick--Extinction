@@ -5,7 +5,7 @@
 	public class Hoop extends MobileSprite
 	{
 		//Flixel content
-		[Embed(source = "../content/hoop.png")] protected var HoopImage:Class;
+		[Embed(source = "../content/Ring.png")] protected var HoopImage:Class;
 			
 		//Tweakable movement/physics variables
 		protected var JUMP_ACCELERATION:Number = 330;
@@ -34,12 +34,12 @@
 		public function Hoop(_X:int, _Y:int) 
 		{
 			super(_X, _Y);
-			loadGraphic(HoopImage, true, true, 48, 48);
+			loadGraphic(HoopImage, true, true, 80, 80);
 			
 			//Setting animations
 			addAnimation("roll", [0]);
-			addAnimation("tip", [0]);
-			addAnimation("fall", [0]);
+			addAnimation("tip", [1,2,3,4], 5);
+			addAnimation("fall", [5,6,7,8,9], 10);
 			addAnimationCallback(AnimationHandler);
 			
 			
@@ -49,6 +49,8 @@
 			
 			ROLL_ACCELERATION = 300;
 			FRICTION = 20;
+			
+			ground_buffer = 0;
 		}
 		
 		public override function update():void
