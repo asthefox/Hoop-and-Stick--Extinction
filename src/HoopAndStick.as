@@ -17,9 +17,9 @@
 		
 		public function HoopAndStick() 
 		{
-			//TODO: Change opening State to TitleState when it's ready
 			super(640, 480, PlayState, 1);
-			StatePointer = 2; //TODO: DELETE THIS LATER
+			//super(640, 480, TitleState, 1); // TODO: THIS IS THE REAL VERSION TO USE ONCE WE HAVE TITLE AND INTRO CUTSCENE
+			StatePointer = 2; //TODO: DELETE THIS LATER. Just need it for skipping the first states
 			
 			StateTypes = new Array();
 			StateTypes[TITLE] = TitleState;
