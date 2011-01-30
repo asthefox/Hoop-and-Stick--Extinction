@@ -9,7 +9,6 @@
 		public static const TITLE : int = 0;
 		public static const INTRO : int = 1;
 		public static const LEVEL1 : int = 2;
-
 		public static const ENDING : int = 3;
 		public static const CREDIT : int = 4; 
 		

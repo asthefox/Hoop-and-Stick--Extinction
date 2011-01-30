@@ -17,7 +17,7 @@
 		
 		public var hitTimer : int = 0;
 		
-		public static var bossHealth : int = 3;
+		public var bossHealth : int = 3;
 		public var moveSpeed : Number = 3;
 		public var moveSpeedCharge : Number = 6;
 		public var destination : FlxPoint; //used when he chooses to fly somewhere. null otherwise

@@ -10,7 +10,7 @@
 		
 		public var player : Player;
 		public var hoop : Hoop;
-		public static var end: Boolean = false;
+		public static var win: Boolean = false;
 		public static var playerhoopoverlap: Boolean; 
 		
 		protected var cameraPoint : FlxObject = null;
@@ -319,16 +319,17 @@
 			if (hoop.state == 4 && !gameOver) {
 				FlxG.log("Bang!");
 				gameOver = true;
+				win = false;
 				FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
 			}
-			if (Boss.bossHealth < 1 && !gameOver) {
+			if (level1.boss.bossHealth < 1 && !gameOver) {
 				gameOver = true;
-				FlxG.fade.start(0xff000000, 8, HoopAndStick.WinGame, true);
+				win = true;
+				FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
 			}
 		}
 		public function MyFadeComplete() : void {
 			    //FlxG.flash.start(0xff000000, 0.1);
-				end = true;
 				HoopAndStick.GetNextState();
 		}
 
