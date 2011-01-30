@@ -100,7 +100,7 @@
 		{
 			var theX : int = Math.random() * BOSS_AREA_X;
 			destination = theX;
-			FlxG.log("Target X: " + destination);
+			//FlxG.log("Target X: " + destination);
 			
 			FlxG.fade.start(0x00ffffff, 2, MoveTo);
 			state = STATE_IDLE;
@@ -108,8 +108,8 @@
 		
 		public function MoveTo() : void
 		{
-			FlxG.log("moveto");
-			FlxG.log("destiny is " + destination);
+			//FlxG.log("moveto");
+			//FlxG.log("destiny is " + destination);
 			state = STATE_FLYING;
 			var toGo : int = destination - mainBody.x;
 			

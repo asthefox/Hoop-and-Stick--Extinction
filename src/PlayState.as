@@ -15,6 +15,7 @@
 		protected const CAMERA_LEAD_X : int = 30;
 		protected const CAMERA_LEAD_Y : int = 30;
 		
+		protected var gameOver:Boolean = false;
 
 		public var speedTrap : Boolean = false;
 
@@ -31,6 +32,7 @@
 			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
+			gameOver = false;
 			
 			add(player);
 			add(hoop);			
@@ -79,7 +81,7 @@
 				}
 				
 				//Check for ground collision - bowling ball
-				for (var i = 0; i < level1.grounds.members.length; i++)
+				for (var i:int = 0; i < level1.grounds.members.length; i++)
 				{
 					/*
 					if (level1.bowlingball.collide(level1.boxstacleTops.members[15]))
@@ -297,12 +299,13 @@
 		
 		public function CheckForEndState() : void
 		{
-
-			if (hoop.state == 4) {
-					FlxG.flash.start(0xff000000, 1, MyFlashComplete);
+			if (hoop.state == 4 && !gameOver) {
+				FlxG.log("Bang!");
+				gameOver = true;
+				FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
 			}
 		}
-		public function MyFlashComplete() : void {
+		public function MyFadeComplete() : void {
 			    //FlxG.flash.start(0xff000000, 0.1);
 				HoopAndStick.GetNextState();
 		}
