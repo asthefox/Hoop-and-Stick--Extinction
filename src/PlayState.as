@@ -28,15 +28,13 @@
 			
 			
 			add(player);
-			add(hoop);
-			
-			
+			add(hoop);			
 		}
 		
 		public override function update():void
 		{	
+			CheckBowlingCollision();
 			CheckGroundCollision();
-			CheckBoxCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
@@ -45,6 +43,33 @@
 			CheckInput();
 			
 			super.update();
+		}
+		
+		protected function CheckBowlingCollision() : void
+		{
+			if (level1.bowlingPins.exists)
+			{
+				//player-hoop-pin barrier
+				if (player.x > level1.bowlingPins.x)
+				{
+					player.x = level1.bowlingPins.x;
+				}
+				if (hoop.x > level1.bowlingPins.x)
+				{
+					hoop.x = level1.bowlingPins.x;
+				}
+				
+				if (FlxU.collide(level1.bowlingPins, level1.bowlingball))
+				{
+					level1.bowlingPins.strike();
+				}
+			}
+			
+			if (FlxU.solveXCollision(hoop,level1.bowlingball))
+			{
+				level1.bowlingball.hit = true;
+				FlxG.log("hit");
+			}
 		}
 		
 		protected function CheckPoisonsCollision() : void
@@ -89,19 +114,19 @@
 		
 		protected function CheckGroundCollision() : void
 		{
+			var playerOnPlatform : Boolean = false;
+			
 			//Check for ground collision
 			for (var i : int = 0; i < level1.grounds.members.length; i++)
 			{
-				player.collide(level1.grounds.members[i]);
+				if(player.collide(level1.grounds.members[i])) playerOnPlatform = true;
 				hoop.collide(level1.grounds.members[i]);
+				level1.bowlingball.collide(level1.grounds.members[i]);
 			}
-		}
-		
-		protected function CheckBoxCollision():void
-		{
-			for (var i : int = 0; i < level1.boxstacles.members.length; i++)
+			
+			for (i = 0; i < level1.boxstacles.members.length; i++)
 			{
-				player.collide(level1.boxstacleTops.members[i]);
+				if(player.collide(level1.boxstacleTops.members[i])) playerOnPlatform = true;
 				hoop.collide(level1.boxstacleTops.members[i]);
 
 				FlxU.solveXCollision(hoop,level1.boxstacles.members[i]);
@@ -109,6 +134,15 @@
 				
 				FlxU.solveXCollision(player,level1.boxstacles.members[i]);
 				FlxU.solveYCollision(player,level1.boxstacles.members[i]);
+			}
+			
+			if (!playerOnPlatform)
+			{
+			//	if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
+			//{
+				//FlxG.log("Fall!");
+				player.Fall();
+			//}
 			}
 		}
 		
