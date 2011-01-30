@@ -41,6 +41,8 @@
 		
 		public const NUM_BLIMPS : int = 20;
 		
+		public var boss : Boss;
+		
 		public var sky : FlxSprite;
 		public var blimps : FlxGroup;
 		public var buildings: FlxGroup;
@@ -89,7 +91,7 @@
 			AddElements();
 			
 			//TEMPORARY BOSS INSERTION
-			var boss : Boss = new Boss(6000);
+			boss = new Boss(6000);
 			FlxG.state.add(boss);
 		}
 		

@@ -26,8 +26,12 @@
 		{	
 			level1 = new Level();
 			
-			player = new Player(100, 1200);//(6000, 960);
-			hoop = new Hoop(100, 1200); // (6000, 960);
+			player = new Player(100, 1200);
+			hoop = new Hoop(100, 1200);
+			
+			//FOR BOSS TESTING
+			//player = new Player(6000, 960);
+			//hoop = new Hoop(6000, 960);
 			
 			//World bounds are set in UpdateCamera now
 			//TODO: Change this once we finalize the level design
@@ -58,6 +62,7 @@
 			CheckPoisonsCollision();
 			//CheckSpikesCollision();
 			UpdateShootingSituation();
+			CheckBossCollision();
 			UpdateCamera();
 			
 			CheckInput();
@@ -316,6 +321,10 @@
 				gameOver = true;
 				FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
 			}
+			if (Boss.bossHealth < 1 && !gameOver) {
+				gameOver = true;
+				FlxG.fade.start(0xff000000, 8, HoopAndStick.WinGame, true);
+			}
 		}
 		public function MyFadeComplete() : void {
 			    //FlxG.flash.start(0xff000000, 0.1);
@@ -325,6 +334,15 @@
 
 		public function CheckInput() : void
 		{
+		}
+		
+		public function CheckBossCollision() : void
+		{
+			if (hoop.collide(level1.boss.weakPoint) || FlxG.keys.justPressed("NINE"))
+			{
+				level1.boss.TakeDamage();
+			}
+			
 		}
 	}
 }

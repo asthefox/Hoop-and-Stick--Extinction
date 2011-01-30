@@ -13,7 +13,6 @@
 		public static const ENDING : int = 4;
 		public static const CREDIT : int = 5; 
 		
-		
 		public static var StateTypes : Array;
 		public static var StatePointer : int = 0;
 		
@@ -31,6 +30,7 @@
 			StateTypes[INTRO] = IntroState;
 			StateTypes[INSTRUCT] = InstructionState;
 			StateTypes[LEVEL1] = PlayState;
+
 			StateTypes[ENDING] = EndingState;
 			StateTypes[CREDIT] = CreditsState;
 		}
@@ -46,5 +46,18 @@
 			StatePointer++;
 			FlxG.state = new StateTypes[StatePointer]();
 		}
+		
+		public static function WinGame() : void
+		{
+			StatePointer+=2;
+			FlxG.state = new StateTypes[StatePointer]();
+		}
+		
+		public static function LoseGame() : void
+		{
+			StatePointer++;
+			FlxG.state = new StateTypes[StatePointer]();
+		}
+		
 	}
 }

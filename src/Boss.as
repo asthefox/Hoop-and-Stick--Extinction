@@ -10,11 +10,14 @@
 		public const WINDUP_TIME : int = 80;
 		public const ALTITUDE : int = 940; //default flight altitude
 		public const ALTITUDE_GROUND : int = 1120;
+		public const HIT_TIME : int = 120;
 		
 		public var mainBody : FlxSprite;
 		public var weakPoint : FlxSprite;
 		
-		public var bossHealth : int = 3;
+		public var hitTimer : int = 0;
+		
+		public static var bossHealth : int = 3;
 		public var moveSpeed : Number = 3;
 		public var moveSpeedCharge : Number = 6;
 		public var destination : FlxPoint; //used when he chooses to fly somewhere. null otherwise
@@ -84,8 +87,9 @@
 			mainBody.solid = false;
 			
 			weakPoint = new FlxSprite(100,60);
-			weakPoint.createGraphic(100, 20, 0xffff0088);
+			weakPoint.createGraphic(100, 30, 0xffff0088);
 			weakPoint.visible = false;
+			weakPoint.solid = true;
 			add(weakPoint);
 		}
 		
@@ -137,6 +141,8 @@
 			if (mainBody.facing == FlxSprite.LEFT) weakPoint.x = mainBody.x;
 			else weakPoint.x = mainBody.x + 100;
 			weakPoint.y = mainBody.y + 60;
+			
+			if (hitTimer > 0) hitTimer--;
 			
 			//mainBody.x += 2;
 			//weakPoint.x += 2;
@@ -268,6 +274,17 @@
 				mainBody.facing = FlxSprite.RIGHT;
 			}
 			
+		}
+		
+		public function TakeDamage() : void
+		{
+			if (hitTimer < 1)
+			{
+				bossHealth--;
+				var goodJobText : PositiveText = new PositiveText(Player.LOCATION.x, Player.LOCATION.y, "Ring Toss: " + (3 - bossHealth) + "/3", 0xffffffff);
+				mainBody.flicker(2);
+				hitTimer = HIT_TIME;
+			}
 		}
 		
 	}
