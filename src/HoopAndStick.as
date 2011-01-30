@@ -19,6 +19,7 @@
 		{
 			//TODO: Change opening State to TitleState when it's ready
 			super(640, 480, PlayState, 1);
+			StatePointer = 2; //TODO: DELETE THIS LATER
 			
 			StateTypes = new Array();
 			StateTypes[TITLE] = TitleState;
