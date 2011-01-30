@@ -12,6 +12,7 @@
 		public var hoop : Hoop;
 		public static var win: Boolean = false;
 		public static var playerhoopoverlap: Boolean; 
+		public var reachedBoss : Boolean = false;
 		
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
@@ -68,6 +69,8 @@
 			CheckInput();
 			
 			CheckForEndState();
+			
+			
 			
 			super.update();
 		}

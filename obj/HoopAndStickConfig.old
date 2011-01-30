@@ -5,15 +5,6 @@
   <target-player>10.0.0</target-player>
   <compiler>
     <source-path append="true">
-<<<<<<< HEAD
-      <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\src</path-element>
-      <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\flixel</path-element>
-      <path-element>C:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
-    </source-path>
-  </compiler>
-  <file-specs>
-    <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
-=======
       <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\src</path-element>
       <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\flixel</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
@@ -21,7 +12,6 @@
   </compiler>
   <file-specs>
     <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
->>>>>>> 88b692432aa0543eb86bf6c17b60e4032cdf166b
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
