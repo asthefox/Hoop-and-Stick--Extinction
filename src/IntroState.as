@@ -18,6 +18,8 @@
 		public var extraExtra : FlxSprite = new FlxSprite(0, 0, ExtraExtra);
 		public var camState : int = 0;
 		
+		public var endScene : Boolean = false;
+		
 		public var targetX:int;
 		public var targetY:int;
 		
@@ -149,9 +151,10 @@
 					fires.members[i].alpha += 0.001;
 					fires.members[i].y -= 0.4;
 					
-					if (fires.members[i].alpha >= 0.75)
+					if (fires.members[i].alpha >= 0.6 && !endScene)
 					{
-						HoopAndStick.GetNextState();
+						FlxG.fade.start(0xff000000, 3, MyFadeComplete, true);
+						endScene = true;
 					}
 				}
 			}
@@ -206,6 +209,10 @@
 			extraExtra.y -= (extraExtra.y - targetY) * posEasing;
 		}
 		
+		private function MyFadeComplete() : void
+		{
+			HoopAndStick.GetNextState();
+		}
 		
 		private function CheckInput() : void
 		{	

@@ -3,10 +3,21 @@
 	import org.flixel.*;
 	public class EndingState extends FlxState
 	{
-		
+		[Embed(source = "../content/winscreen.png")] protected var WinScreen:Class;
+		[Embed(source = "../content/endscreen.png")] protected var EndScreen:Class;
 		public function EndingState() 
 		{
-			var titleText : FlxText = new FlxText(FlxG.width / 2, 100, 600, "Ending Cutscene/Credits?");
+			if (PlayState.end == true) {
+				var end1: FlxSprite = new FlxSprite(0, 0, EndScreen);
+				add(end1);
+			}
+			else{
+				var end2: FlxSprite = new FlxSprite(0, 0, WinScreen);
+				add(end2);
+			}
+			
+			
+			/*var titleText : FlxText = new FlxText(FlxG.width / 2, 100, 600, "Ending Cutscene/Credits?");
 			titleText.size = 16;
 			titleText.alignment = "center";
 			titleText.x -= titleText.width / 2;
@@ -20,7 +31,7 @@
 			promptText.size = 16;
 			promptText.alignment = "center";
 			promptText.x -= promptText.width / 2;
-			add(promptText);
+			add(promptText);*/
 		}
 		
 		public override function create():void
@@ -37,7 +48,7 @@
 		{	
 			if (FlxG.keys.justPressed("ENTER"))
 			{
-				HoopAndStick.ResetGame();
+				HoopAndStick.GetNextState();
 			}
 		}
 		

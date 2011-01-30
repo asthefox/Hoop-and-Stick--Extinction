@@ -9,8 +9,11 @@
 		public static const TITLE : int = 0;
 		public static const INTRO : int = 1;
 		public static const LEVEL1 : int = 2;
-		public static const LOSE : int = 3;
-		public static const WIN : int = 4;
+
+		public static const ENDING : int = 3;
+		public static const CREDIT : int = 4; 
+		
+>>>>>>> b84be84ab6988e6cdb655a20c0726af493e3bf06
 		
 		public static var StateTypes : Array;
 		public static var StatePointer : int = 0;
@@ -28,8 +31,10 @@
 			StateTypes[TITLE] = TitleState;
 			StateTypes[INTRO] = IntroState;
 			StateTypes[LEVEL1] = PlayState;
-			StateTypes[LOSE] = EndingState;
-			StateTypes[WIN] = EndingState;
+
+			StateTypes[ENDING] = EndingState;
+			StateTypes[CREDIT] = CreditsState;
+>>>>>>> b84be84ab6988e6cdb655a20c0726af493e3bf06
 		}
 		
 		public static function ResetGame() : void

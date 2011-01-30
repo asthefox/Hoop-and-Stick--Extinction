@@ -10,6 +10,8 @@
 		
 		public var player : Player;
 		public var hoop : Hoop;
+		public static var end: Boolean = false;
+		public static var playerhoopoverlap: Boolean; 
 		
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
@@ -46,6 +48,13 @@
 		
 		public override function update():void
 		{	
+			//Check for hoop and stick collision
+			if (player.overlaps(hoop)== true) {
+				playerhoopoverlap = true;
+			}
+			else if(player.overlaps(hoop)== false){
+					playerhoopoverlap = false;
+			}
 			
 			CheckBowlingCollision();
 			CheckGroundCollision();
@@ -83,7 +92,6 @@
 				}
 				if (FlxU.solveXCollision(hoop,level1.bowlingball))
 				{
-					var pText : PositiveText = new PositiveText(player.x, level1.bowlingball.y - 40, "GAME STARTED: BOWLING!\nONE OF THREE GAMES REVIVED", 0xffffff);
 					level1.bowlingball.hit = true;
 				}
 				
@@ -106,6 +114,7 @@
 			{
 				if (level1.bowlingball.exists)
 				{
+					var pText : PositiveText = new PositiveText(player.x, level1.bowlingPins.y, "GAME STARTED: BOWLING!\nONE OF THREE GAMES REVIVED", 0xffffff);
 					level1.bowlingball.kill();
 				}
 			}
@@ -250,7 +259,8 @@
 		}
 		
 		protected function CheckStickHit() : void {
-			//Check for hoop and stick collision
+
+			
 			//Is player swinging?
 			if (player.state == Player.STATE_SWING && hoop.state != Hoop.STATE_LOSE)
 			{
@@ -318,6 +328,7 @@
 		}
 		public function MyFadeComplete() : void {
 			    //FlxG.flash.start(0xff000000, 0.1);
+				end = true;
 				HoopAndStick.GetNextState();
 		}
 
