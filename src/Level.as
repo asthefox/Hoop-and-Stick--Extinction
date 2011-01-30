@@ -59,6 +59,8 @@
 		public var bowlingball : Bowlingball;
 		public var bowlingPins : BowlingPins;
 		
+		public var shootingSituation : ShootingSituation;
+		
 		public function Level() 
 		{
 			sky = new FlxSprite(0, 0);
@@ -66,8 +68,12 @@
 			sky.scrollFactor.x = 0;
 			sky.solid = false;
 			
-			bowlingball = new Bowlingball(400, 1200);
-			bowlingPins = new BowlingPins(600, 1200);
+			bowlingball = new Bowlingball(1200, 1000);
+			bowlingPins = new BowlingPins(1420, 1070);
+			
+			shootingSituation = new ShootingSituation();
+			shootingSituation.y = 1000;
+			shootingSituation.x = 3330;
 			
 			spikes = new FlxGroup();
 			//var spikes1: FlxSprite = new FlxSprite(250, 1250, Spikes);
@@ -238,8 +244,8 @@
 			{
 				//#2
 				if (i == 0) {
-					box01 = new Boxstacle(700, 1280);
-					boxTop01  = new BoxstacleTop(700, 1280);
+					box01 = new Boxstacle(686, 1280);
+					boxTop01  = new BoxstacleTop(686, 1280);
 					//poisons1 = new FlxSprite(640 * 1 + 205, 1250);
 				}
 				else if (i == 1) {
@@ -248,16 +254,16 @@
 				}
 				//#3 and 4
 				else if (i == 2) {
-					box01 = new Boxstacle(1670, 1230);
-					boxTop01  = new BoxstacleTop(1670, 1230);
+					box01 = new Boxstacle(1680, 1210);
+					boxTop01  = new BoxstacleTop(1680, 1210);
 				}
 				else if (i == 3) {
-					box01 = new Boxstacle(1850, 1230);
-					boxTop01  = new BoxstacleTop(1850, 1230);
+					box01 = new Boxstacle(1855, 1215);
+					boxTop01  = new BoxstacleTop(1855, 1215);
 				}
 				else if (i == 4) {
-					box01 = new Boxstacle(2030, 1230);
-					boxTop01  = new BoxstacleTop(2030, 1230);
+					box01 = new Boxstacle(2030, 1210);
+					boxTop01  = new BoxstacleTop(2030, 1210);
 				}
 				//#5 & 6
 				else if (i == 5) {
@@ -324,6 +330,7 @@
 			FlxG.state.add(poisons);
 			FlxG.state.add(bowlingball);
 			FlxG.state.add(bowlingPins);
+			FlxG.state.add(shootingSituation);
 			//FlxG.state.add(wrapper);
 		}
 		

@@ -24,9 +24,10 @@
 		
 		protected var slope_acceleration : Number = 0;
 		protected var force_acceleration : Number = 0;
-		protected var ground_buffer : int = 5;
+		public var ground_buffer : int = 5;
 		protected var last_x : int = 0;
 		protected var ROLL_BUFFER : Number = 1;
+		public var supported : Boolean = false;
 		
 		public function MobileSprite(X:Number=0,Y:Number=0, SimpleGraphic:Class=null)
 		{
@@ -55,12 +56,6 @@
 			}
 			
 			last_x = x;
-			
-			//if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
-			//{
-			//	//FlxG.log("Fall!");
-			//	Fall();
-			//}
 			
 			super.update();
 		}
@@ -106,6 +101,12 @@
 						//}
 						
 						return true;
+					}
+					
+					if (FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 15))
+					{
+						//FlxG.log("Fall!");
+						supported = true;
 					}
 				}
 				return false;

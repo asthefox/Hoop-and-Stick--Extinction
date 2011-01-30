@@ -35,7 +35,11 @@
     <option verboseStackTraces="False" />
     <option linkReport="" />
     <option loadExterns="" />
+<<<<<<< HEAD
     <option additional="-static-link-runtime-shared-libraries=true" />
+=======
+    <option additional="-static-link-runtime-shared-libraries" />
+>>>>>>> 965e45ea00e03df0680a3af2095bda91e195c71e
     <option customSDK="" />
   </build>
   <!-- SWC Include Libraries -->
