@@ -10,9 +10,11 @@
 		
 		public var player : Player;
 		public var hoop : Hoop;
+		
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
 		protected const CAMERA_LEAD_Y : int = 30;
+		
 		
 		override public function create():void
 		{	
@@ -38,7 +40,7 @@
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
-			CheckSpikesCollision();
+			//CheckSpikesCollision();
 			UpdateShootingSituation();
 			UpdateCamera();
 			
@@ -279,16 +281,18 @@
 		
 		public function CheckForEndState() : void
 		{
+
 			if (hoop.state == 4) {
-				HoopAndStick.GetNextState();
+					FlxG.flash.start(0xff000000, 1, MyFlashComplete);
 			}
 		}
+		public function MyFlashComplete() : void {
+			    //FlxG.flash.start(0xff000000, 0.1);
+				HoopAndStick.GetNextState();
+		}
+
 		public function CheckInput() : void
 		{
-			if (FlxG.keys.justPressed("ENTER"))
-			{
-				HoopAndStick.GetNextState();
-			}
 		}
 	}
 }
