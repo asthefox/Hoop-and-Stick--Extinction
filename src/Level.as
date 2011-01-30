@@ -22,6 +22,9 @@
 		public var sky : FlxSprite;
 		public var grounds : FlxGroup;
 		
+		public var boxstacles : FlxGroup;
+		public var boxstacleTops : FlxGroup;
+		
 		public function Level() 
 		{
 			sky = new FlxSprite(0, 0);
@@ -52,6 +55,14 @@
 			var ground10 : Platform = new Platform(0 + 640*9, 1198, Ground10);
 			grounds.add(ground10);
 			
+			boxstacles = new FlxGroup();
+			boxstacleTops = new FlxGroup();
+			
+			var box01 : Boxstacle = new Boxstacle(100, 1280);
+			var boxTop01 : BoxstacleTop = new BoxstacleTop(100, 1280);
+			boxstacles.add(box01);
+			boxstacleTops.add(boxTop01);
+			
 			AddElements();
 			
 		}
@@ -60,8 +71,11 @@
 		{
 			FlxG.state.add(sky);
 			
-			
 			FlxG.state.add(grounds);
+			
+			FlxG.state.add(boxstacles);
+			
+			FlxG.state.add(boxstacleTops);
 			
 
 		}
