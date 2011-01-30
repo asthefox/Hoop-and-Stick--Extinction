@@ -13,7 +13,7 @@
 	public class Player extends MobileSprite
 	{
 		//Flixel content
-		[Embed(source = "../content/PlayerAnim3.png")] protected var PlayerImage:Class;
+		[Embed(source = "../content/PlayerAnim4.png")] protected var PlayerImage:Class;
 		
 		//Input buttons
 		protected var BUTTON_JUMP:String = "W";
@@ -60,7 +60,8 @@
 			addAnimation("run", [0, 1, 2, 3, 4, 5], 5); 
 			addAnimation("jump", [7]);
 			addAnimation("fall", [0]);
-			addAnimation("swing", [8, 9, 10, 0], 5, false);
+			addAnimation("swing", [8, 9, 10, 11, 12, 12, 0], 5, false);
+			addAnimation("swingF", [13, 14, 15, 0], 5, false);
 			addAnimation("stun", [0]);
 			addAnimationCallback(AnimationHandler);
 			
