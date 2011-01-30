@@ -10,6 +10,7 @@
 		
 		public var player : Player;
 		public var hoop : Hoop;
+		public static var end: Boolean = false;
 		
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
@@ -79,7 +80,7 @@
 				}
 				
 				//Check for ground collision - bowling ball
-				for (var i = 0; i < level1.grounds.members.length; i++)
+				for (var i:int = 0; i < level1.grounds.members.length; i++)
 				{
 					/*
 					if (level1.bowlingball.collide(level1.boxstacleTops.members[15]))
@@ -304,6 +305,7 @@
 		}
 		public function MyFlashComplete() : void {
 			    //FlxG.flash.start(0xff000000, 0.1);
+				end = true;
 				HoopAndStick.GetNextState();
 		}
 
