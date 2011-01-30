@@ -63,12 +63,17 @@
 				{
 					level1.bowlingPins.strike();
 				}
+				if (FlxU.solveXCollision(hoop,level1.bowlingball))
+				{
+					level1.bowlingball.hit = true;
+				}
 			}
-			
-			if (FlxU.solveXCollision(hoop,level1.bowlingball))
+			else
 			{
-				level1.bowlingball.hit = true;
-				FlxG.log("hit");
+				if (level1.bowlingball.exists)
+				{
+					level1.bowlingball.kill();
+				}
 			}
 		}
 		
@@ -80,15 +85,7 @@
 				level1.poisons.members[i].play("PoisonAnimation");
 				if (player.overlaps(level1.poisons.members[i]) == true) {
 					//slow down player
-					if (player.velocity.x > 0) {
-						player.velocity.x -= 600;
-						player.flicker(1.5); 
-					}
-					else {
-						//player.velocity.x += 40;
-						player.velocity.x += 600;
-						player.flicker(1.5); 
-					}
+					player.velocity.x = -1000;
 				}
 			}
 		}
