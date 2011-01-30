@@ -8,10 +8,10 @@
 	{
 		public static const TITLE : int = 0;
 		public static const INTRO : int = 1;
-		public static const LEVEL1 : int = 2;
-		public static const ENDING : int = 3;
-		public static const CREDIT : int = 4; 
-		
+		public static const INSTRUCT : int = 2;
+		public static const LEVEL1 : int = 3;
+		public static const ENDING : int = 4;
+		public static const CREDIT : int = 5; 
 		
 		public static var StateTypes : Array;
 		public static var StatePointer : int = 0;
@@ -28,6 +28,7 @@
 			StateTypes = new Array();
 			StateTypes[TITLE] = TitleState;
 			StateTypes[INTRO] = IntroState;
+			StateTypes[INSTRUCT] = InstructionState;
 			StateTypes[LEVEL1] = PlayState;
 
 			StateTypes[ENDING] = EndingState;
