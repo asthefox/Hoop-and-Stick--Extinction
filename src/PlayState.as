@@ -47,6 +47,24 @@
 		
 		protected function CheckBowlingCollision() : void
 		{
+			if (level1.bowlingPins.exists)
+			{
+				//player-hoop-pin barrier
+				if (player.x > level1.bowlingPins.x)
+				{
+					player.x = level1.bowlingPins.x;
+				}
+				if (hoop.x > level1.bowlingPins.x)
+				{
+					hoop.x = level1.bowlingPins.x;
+				}
+				
+				if (FlxU.collide(level1.bowlingPins, level1.bowlingball))
+				{
+					level1.bowlingPins.strike();
+				}
+			}
+			
 			if (FlxU.solveXCollision(hoop,level1.bowlingball))
 			{
 				level1.bowlingball.hit = true;

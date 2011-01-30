@@ -36,6 +36,7 @@
 		//public var wrapper : WrappingSprite;
 		
 		public var bowlingball : Bowlingball;
+		public var bowlingPins : BowlingPins;
 		
 		public function Level() 
 		{
@@ -45,6 +46,7 @@
 			sky.solid = false;
 			
 			bowlingball = new Bowlingball(400, 1250);
+			bowlingPins = new BowlingPins(600, 1200);
 			
 			spikes = new FlxGroup();
 			//var spikes1: FlxSprite = new FlxSprite(250, 1250, Spikes);
@@ -138,6 +140,7 @@
 			FlxG.state.add(grounds);
 			FlxG.state.add(poisons);
 			FlxG.state.add(bowlingball);
+			FlxG.state.add(bowlingPins);
 			//FlxG.state.add(wrapper);
 		}
 		
