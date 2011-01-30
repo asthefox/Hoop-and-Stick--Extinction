@@ -36,12 +36,55 @@
 		public override function update():void
 		{	
 			CheckGroundCollision();
+			CheckBoxCollision();
 			CheckStickHit();
+			CheckPoisonsCollision();
+			CheckSpikesCollision();
 			UpdateCamera();
 			
 			CheckInput();
 			
 			super.update();
+		}
+		
+		protected function CheckPoisonsCollision() : void
+		{
+			//Check for poison collision with Player
+			for (var i : int = 0; i < level1.poisons.members.length; i++)
+			{
+				level1.poisons.members[i].play("PoisonAnimation");
+				if (player.overlaps(level1.poisons.members[i]) == true) {
+					//slow down player
+					if (player.velocity.x > 0) {
+						player.velocity.x -= 600;
+						player.flicker(1.5); 
+					}
+					else {
+						//player.velocity.x += 40;
+						player.velocity.x += 600;
+						player.flicker(1.5); 
+					}
+				}
+			}
+		}
+		
+		protected function CheckSpikesCollision() : void
+		{
+			//Check for poison collision
+			for (var i : int = 0; i < level1.spikes.members.length; i++)
+			{
+				if (hoop.overlaps(level1.spikes.members[i]) == true) {
+					if (hoop.velocity.x > 0) {
+						hoop.velocity.x -= 100;
+						hoop.flicker(1.5); 
+					}
+					else {
+						//player.velocity.x += 40;
+						hoop.velocity.x += 100;
+						hoop.flicker(1.5); 
+					}
+				}
+			}
 		}
 		
 		protected function CheckGroundCollision() : void
@@ -52,9 +95,21 @@
 				player.collide(level1.grounds.members[i]);
 				hoop.collide(level1.grounds.members[i]);
 			}
-			
-			
+		}
+		
+		protected function CheckBoxCollision():void
+		{
+			for (var i : int = 0; i < level1.boxstacles.members.length; i++)
+			{
+				player.collide(level1.boxstacleTops.members[i]);
+				hoop.collide(level1.boxstacleTops.members[i]);
 
+				FlxU.solveXCollision(hoop,level1.boxstacles.members[i]);
+				FlxU.solveYCollision(hoop, level1.boxstacles.members[i]);
+				
+				FlxU.solveXCollision(player,level1.boxstacles.members[i]);
+				FlxU.solveYCollision(player,level1.boxstacles.members[i]);
+			}
 		}
 		
 		protected function CheckStickHit() : void {
