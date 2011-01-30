@@ -12,8 +12,8 @@
 		protected static const SPIN_DRAG:Number = 500; //240;
 		
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
-		protected var HOOP_START_X:int = 100;
-		protected var HOOP_START_Y:int = 100;
+		//protected var HOOP_START_X:int = 100;
+		//protected var HOOP_START_Y:int = 100;
 		
 		//State Machine!
 		public static const STATE_GROUND:int = 0;
@@ -29,9 +29,9 @@
 		
 		
 		
-		public function Hoop() 
+		public function Hoop(_X:int, _Y:int) 
 		{
-			super(HOOP_START_X, HOOP_START_Y);
+			super(_X, _Y);
 			loadGraphic(HoopImage, true, true, 48, 48);
 			
 			//Setting animations
