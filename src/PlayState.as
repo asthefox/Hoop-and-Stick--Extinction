@@ -18,8 +18,8 @@
 		{	
 			level1 = new Level();
 			
-			player = new Player();
-			hoop = new Hoop();
+			player = new Player(100, 960);
+			hoop = new Hoop(100, 960);
 			
 			//Set World bounds. NOTE: this is done in UpdateCamera now
 			//TODO: Change this once we finalize the level design
@@ -45,8 +45,14 @@
 		protected function CheckGroundCollision() : void
 		{
 			//Check for ground collision
-			player.collide(level1.ground);
-			hoop.collide(level1.ground);
+			for (var i : int = 0; i < level1.grounds.members.length; i++)
+			{
+				player.collide(level1.grounds.members[i]);
+				hoop.collide(level1.grounds.members[i]);
+			}
+			
+			
+
 		}
 		
 		protected function CheckStickHit() : void {
@@ -91,12 +97,10 @@
 			if (player.facing == FlxSprite.LEFT)
 			{
 				cameraPoint.x -= CAMERA_LEAD_X;
-				//FlxG.log("facing left");
 			}
 			else if (player.facing == FlxSprite.RIGHT)
 			{
 				cameraPoint.x += CAMERA_LEAD_X;
-				//FlxG.log("facing right");
 			}
 			
 			

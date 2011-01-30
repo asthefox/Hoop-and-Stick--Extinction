@@ -29,8 +29,8 @@
 		protected static const PLAYER_RUN_SPEED:int = 100;
 		protected static const JUMP_ACCELERATION:Number = 500;
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
-		protected var PLAYER_START_X:int = 100;
-		protected var PLAYER_START_Y:int = 100;
+		//protected var PLAYER_START_X:int = 100;
+		//protected var PLAYER_START_Y:int = 100;
 		
 		public static const HORIZONTAL_HIT_FORCE:Number = 50;
 		public static const VERTICAL_HIT_FORCE:Number = 200;
@@ -48,9 +48,9 @@
 		public var stickDir : int = 0;		// Current direction that you're hitting the hoop in
 		public static const NONE : int = -1;
 		
-		public function Player()
+		public function Player(_X:int, _Y:int)
 		{
-			super(PLAYER_START_X, PLAYER_START_Y);
+			super(_X, _Y);
 			loadGraphic(PlayerImage, true, true, 50, 100);
 			
 			//Setting animations
