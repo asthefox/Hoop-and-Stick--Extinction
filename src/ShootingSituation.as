@@ -84,6 +84,7 @@
 			happy = true;
 			guy.isHappy = true;
 			target = (FlxG.state as PlayState).hoop;
+			var pText : PositiveText = new PositiveText((FlxG.state as PlayState).player.x, (FlxG.state as PlayState).player.y - 40, "GAME STARTED: PAINTBALL!\nTWO OF THREE GAMES REVIVED", 0xffffff);
 		}
 		
 		public function Open() : void
