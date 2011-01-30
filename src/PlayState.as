@@ -5,11 +5,9 @@
 	public class PlayState extends FlxState
 	{
 		//Embedding Flixel images into classes
-		[Embed(source = "../content/level1ground.png")] 	protected var Ground:Class;
-		[Embed(source = "../content/level1bg.png")] protected var BG:Class;
 		
-		protected var bg : FlxSprite;
-		protected var ground : FlxSprite;
+		protected var level1 : Level;
+		
 		protected var player : Player;
 		protected var hoop : Hoop;
 		protected var cameraPoint : FlxObject = null;
@@ -18,10 +16,7 @@
 		
 		override public function create():void
 		{	
-			bg = new FlxSprite(0, 0, BG);
-			bg.solid = false;
-			
-			ground = new Platform(0, 0, Ground);
+			level1 = new Level();
 			
 			player = new Player();
 			hoop = new Hoop();
@@ -31,8 +26,7 @@
 			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
-			add(bg);
-			add(ground);
+			
 			add(player);
 			add(hoop);
 			
@@ -51,8 +45,8 @@
 		protected function CheckGroundCollision() : void
 		{
 			//Check for ground collision
-			player.collide(ground);
-			hoop.collide(ground);
+			player.collide(level1.ground);
+			hoop.collide(level1.ground);
 		}
 		
 		protected function CheckStickHit() : void {
