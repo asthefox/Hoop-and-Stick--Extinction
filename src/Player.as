@@ -63,7 +63,7 @@
 			addAnimation("jump", [7]);
 			addAnimation("fall", [0]);
 			addAnimation("swing", [8, 9, 10, 11, 12, 12, 0], 5, false);
-			addAnimation("swingF", [13, 14, 15, 0], 5, false);
+			addAnimation("swingF", [13, 14, 15, 0], 7, false);
 			addAnimation("stun", [0]);
 			addAnimationCallback(AnimationHandler);
 			
@@ -195,10 +195,10 @@
 				play("stun");
 			} else if (state == STATE_SWING) {
 				//if (PlayState.playerhoopoverlap == true) {
-					play("swing");
+					//play("swing");
 				//}
 				//else if(PlayState.playerhoopoverlap == false){
-					//play("swingF");
+					play("swingF");
 				//}
 			}
 			
