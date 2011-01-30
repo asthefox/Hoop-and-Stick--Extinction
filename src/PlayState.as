@@ -30,7 +30,10 @@
 			
 			
 			add(player);
-			add(hoop);			
+			add(hoop);		
+			
+			FlxG.flash.start(0xFF000000);
+
 		}
 		
 		public override function update():void
@@ -76,7 +79,7 @@
 				}
 				
 				//Check for ground collision - bowling ball
-				for (var i = 0; i < level1.grounds.members.length; i++)
+				for (var i:int = 0; i < level1.grounds.members.length; i++)
 				{
 					/*
 					if (level1.bowlingball.collide(level1.boxstacleTops.members[15]))
