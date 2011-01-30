@@ -12,7 +12,7 @@ package
 			loadGraphic(PinImage, true, true, 240, 150);
 			
 			addAnimation("bottles", [0]);
-			addAnimation("pinSmash", [0, 1, 2, 3, 4, 5], 10, true);
+			addAnimation("pinSmash", [0, 1, 2, 3, 4, 5], 7, true);
 			play("bottles");
 		}
 		

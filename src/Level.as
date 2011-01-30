@@ -303,10 +303,9 @@
 					boxTop01  = new BoxstacleTop(5180, 1200);
 				}
 
-				//boxstacles.add(box01);
-				//boxstacleTops.add(boxTop01);
+				boxstacles.add(box01);
+				boxstacleTops.add(boxTop01);
 			}
-			
 			
 			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
 			
