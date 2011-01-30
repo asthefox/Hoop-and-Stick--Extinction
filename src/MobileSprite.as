@@ -15,7 +15,7 @@
 	public class MobileSprite extends FlxSprite
 	{
 		
-		protected static const GRAVITY_ACCELERATION:Number = 600;//820;
+		protected var GRAVITY_ACCELERATION:Number = 600;//820;
 
 		protected var MIN_SLOPE : Number = 0.1;			//Minimum slope that causes rolling
 		protected var ROLL_ACCELERATION : Number = 1;	//Rolling acceleration rate
@@ -55,6 +55,12 @@
 			}
 			
 			last_x = x;
+			
+			//if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
+			//{
+			//	//FlxG.log("Fall!");
+			//	Fall();
+			//}
 			
 			super.update();
 		}
@@ -100,12 +106,6 @@
 						}
 						
 						return true;
-					}
-					
-					if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
-					{
-						//FlxG.log("Fall!");
-						Fall();
 					}
 				}
 				return false;
