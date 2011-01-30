@@ -75,11 +75,11 @@
 			shootingSituation.y = 1000;
 			shootingSituation.x = 3330;
 			
-			spikes = new FlxGroup();
+			/*spikes = new FlxGroup();
 			//var spikes1: FlxSprite = new FlxSprite(250, 1250, Spikes);
 			//spikes.add(spikes1);
 			var spikes2: FlxSprite = new FlxSprite(640 * 4 + 520, 1310, Spikes);
-			spikes.add(spikes2);
+			spikes.add(spikes2);*/
 			
 			PlacePoisons();
 			PlaceBlimps();
@@ -244,13 +244,13 @@
 			{
 				//#2
 				if (i == 0) {
-					box01 = new Boxstacle(600, 1280);
-					boxTop01  = new BoxstacleTop(600, 1280);
+					box01 = new Boxstacle(500, 1230);
+					boxTop01  = new BoxstacleTop(500, 1230);
 					//poisons1 = new FlxSprite(640 * 1 + 205, 1250);
 				}
 				else if (i == 1) {
-					box01 = new Boxstacle(740, 1180);
-					boxTop01  = new BoxstacleTop(740, 1180);
+					box01 = new Boxstacle(740, 1280);
+					boxTop01  = new BoxstacleTop(740, 1280);
 				}
 				//#3 and 4
 				else if (i == 2) {

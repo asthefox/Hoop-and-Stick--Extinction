@@ -10,11 +10,15 @@
 		
 		public var player : Player;
 		public var hoop : Hoop;
+		
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
 		protected const CAMERA_LEAD_Y : int = 30;
 		
+		protected var gameOver:Boolean = false;
+
 		public var speedTrap : Boolean = false;
+
 		
 		override public function create():void
 		{	
@@ -28,6 +32,7 @@
 			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
+			gameOver = false;
 			
 			add(player);
 			add(hoop);		
@@ -43,7 +48,7 @@
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
-			CheckSpikesCollision();
+			//CheckSpikesCollision();
 			UpdateShootingSituation();
 			UpdateCamera();
 			
@@ -297,16 +302,19 @@
 		
 		public function CheckForEndState() : void
 		{
-			if (hoop.state == 4) {
-				HoopAndStick.GetNextState();
+			if (hoop.state == 4 && !gameOver) {
+				FlxG.log("Bang!");
+				gameOver = true;
+				FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
 			}
 		}
+		public function MyFadeComplete() : void {
+			    //FlxG.flash.start(0xff000000, 0.1);
+				HoopAndStick.GetNextState();
+		}
+
 		public function CheckInput() : void
 		{
-			if (FlxG.keys.justPressed("ENTER"))
-			{
-				HoopAndStick.GetNextState();
-			}
 		}
 	}
 }

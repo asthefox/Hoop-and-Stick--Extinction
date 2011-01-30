@@ -15,7 +15,8 @@
 			titleText.alignment = "center";
 			titleText.x -= titleText.width / 2;
 			add(titleText);*/
-			var promptText : FlxText = new FlxText(FlxG.width / 2, 310, 1300, "Press Enter and Fear the Dice");
+//			var promptText : FlxText = new FlxText(FlxG.width / 2, 310, 1300, "Press Enter and Fear the Dice");
+			var promptText : FlxText = new FlxText(420, 450, 1300, "Press Enter and Fear the Dice");
 			promptText.size = 16;
 			promptText.alignment = "center";
 			promptText.x -= promptText.width / 2;
