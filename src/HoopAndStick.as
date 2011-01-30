@@ -10,6 +10,8 @@
 		public static const INTRO : int = 1;
 		public static const LEVEL1 : int = 2;
 		public static const ENDING : int = 3;
+		public static const CREDIT : int = 4; 
+		
 		
 		public static var StateTypes : Array;
 		public static var StatePointer : int = 0;
@@ -28,6 +30,7 @@
 			StateTypes[INTRO] = IntroState;
 			StateTypes[LEVEL1] = PlayState;
 			StateTypes[ENDING] = EndingState;
+			StateTypes[CREDIT] = CreditsState;
 		}
 		
 		public static function ResetGame() : void

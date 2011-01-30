@@ -17,13 +17,22 @@
       <value>'1/30/2011'</value>
     </define>
     <source-path append="true">
+<<<<<<< HEAD
       <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\src</path-element>
       <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\flixel</path-element>
+=======
+      <path-element>C:\Documents and Settings\kedar\My Documents\Hoop2\Hoop-and-Stick--Extinction\src</path-element>
+      <path-element>C:\Documents and Settings\kedar\My Documents\Hoop2\Hoop-and-Stick--Extinction\flixel</path-element>
+>>>>>>> 550c14d6ba4b5e362f4329efdd9a6322c7162b67
       <path-element>C:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
+<<<<<<< HEAD
     <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
+=======
+    <path-element>C:\Documents and Settings\kedar\My Documents\Hoop2\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
+>>>>>>> 550c14d6ba4b5e362f4329efdd9a6322c7162b67
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
