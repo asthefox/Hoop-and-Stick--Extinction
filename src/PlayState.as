@@ -46,6 +46,8 @@
 			
 			CheckInput();
 			
+			CheckForEndState();
+			
 			super.update();
 		}
 		
@@ -69,17 +71,20 @@
 				}
 				if (FlxU.solveXCollision(hoop,level1.bowlingball))
 				{
+					var pText : PositiveText = new PositiveText(player.x, level1.bowlingball.y - 40, "GAME STARTED: BOWLING!\nONE OF THREE GAMES REVIVED", 0xffffff);
 					level1.bowlingball.hit = true;
 				}
 				
 				//Check for ground collision - bowling ball
 				for (var i = 0; i < level1.grounds.members.length; i++)
 				{
+					/*
 					if (level1.bowlingball.collide(level1.boxstacleTops.members[15]))
 					{
 						break;
 					}
-					else if (level1.bowlingball.collide(level1.grounds.members[i]))
+					*/
+					if (level1.bowlingball.collide(level1.grounds.members[i]))
 					{
 						break;
 					}
@@ -286,6 +291,13 @@
 			FlxG.followBounds(0, 0, 6400, 1440, true); //also sets world bounds
 		}
 		
+		
+		public function CheckForEndState() : void
+		{
+			if (hoop.state == 4) {
+				HoopAndStick.GetNextState();
+			}
+		}
 		public function CheckInput() : void
 		{
 			if (FlxG.keys.justPressed("ENTER"))

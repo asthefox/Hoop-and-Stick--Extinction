@@ -240,17 +240,17 @@
 			
 			
 			
-			for (var i : int = 0; i < 16; i++)
+			for (var i : int = 0; i < 15; i++)
 			{
 				//#2
 				if (i == 0) {
-					box01 = new Boxstacle(686, 1280);
-					boxTop01  = new BoxstacleTop(686, 1280);
+					box01 = new Boxstacle(600, 1280);
+					boxTop01  = new BoxstacleTop(600, 1280);
 					//poisons1 = new FlxSprite(640 * 1 + 205, 1250);
 				}
 				else if (i == 1) {
-					box01 = new Boxstacle(840, 1180);
-					boxTop01  = new BoxstacleTop(840, 1180);
+					box01 = new Boxstacle(740, 1180);
+					boxTop01  = new BoxstacleTop(740, 1180);
 				}
 				//#3 and 4
 				else if (i == 2) {
@@ -309,11 +309,12 @@
 					boxTop01  = new BoxstacleTop(5180, 1200);
 				}
 				
-				//bowling ball platform (referenced explicitly by collision code -- DON'T CHANGE!!!)
+				/*bowling ball platform (referenced explicitly by collision code -- DON'T CHANGE!!!)
 				else if (i == 15) {
 					box01 = new Boxstacle(1150, 1170);
 					boxTop01  = new BoxstacleTop(1150, 1170);
 				}
+				*/
 
 				boxstacles.add(box01);
 				boxstacleTops.add(boxTop01);

@@ -68,7 +68,7 @@
 			}
 			else if (overlaps((FlxG.state as PlayState).hoop))
 			{
-				(FlxG.state as PlayState).level1.shootingSituation.Happy();
+				if (!(FlxG.state as PlayState).level1.shootingSituation.happy) (FlxG.state as PlayState).level1.shootingSituation.Happy();
 			}
 			else if (x > ((FlxG.state as PlayState).level1.shootingSituation.obstacle.x))
 			{
