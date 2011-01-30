@@ -13,7 +13,7 @@
 		protected static const SPIN_MULTIPLIER:Number = 9;
 		protected static const SPIN_DRAG:Number = 500; //240;
 		
-		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
+		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 1.5;//0.85;
 		protected static const TIP_THRESHHOLD:Number = 5;
 		//protected var HOOP_START_X:int = 100;
 		//protected var HOOP_START_Y:int = 100;
@@ -76,14 +76,14 @@
 			}
 			
 			// Handle spinning
-			/*
+			
 			angularVelocity = velocity.x * SPIN_MULTIPLIER;
 			angularDrag = SPIN_DRAG;
 			if (state == STATE_GROUND && angularVelocity > -45 && angularVelocity < 45) {
 				angle = 0;
 				angularVelocity = 0;
 			}
-			*/
+			
 			
 			/*
 			if (state == STATE_AIR) FlxG.log("In air");
