@@ -244,13 +244,13 @@
 			{
 				//#2
 				if (i == 0) {
-					box01 = new Boxstacle(686, 1280);
-					boxTop01  = new BoxstacleTop(686, 1280);
+					box01 = new Boxstacle(600, 1280);
+					boxTop01  = new BoxstacleTop(600, 1280);
 					//poisons1 = new FlxSprite(640 * 1 + 205, 1250);
 				}
 				else if (i == 1) {
-					box01 = new Boxstacle(840, 1180);
-					boxTop01  = new BoxstacleTop(840, 1180);
+					box01 = new Boxstacle(740, 1180);
+					boxTop01  = new BoxstacleTop(740, 1180);
 				}
 				//#3 and 4
 				else if (i == 2) {

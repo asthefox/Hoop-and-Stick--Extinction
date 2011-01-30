@@ -44,6 +44,8 @@
 			
 			CheckInput();
 			
+			CheckForEndState();
+			
 			super.update();
 		}
 		
@@ -273,6 +275,13 @@
 			FlxG.followBounds(0, 0, 6400, 1440, true); //also sets world bounds
 		}
 		
+		
+		public function CheckForEndState() : void
+		{
+			if (hoop.state == 4) {
+				HoopAndStick.GetNextState();
+			}
+		}
 		public function CheckInput() : void
 		{
 			if (FlxG.keys.justPressed("ENTER"))
