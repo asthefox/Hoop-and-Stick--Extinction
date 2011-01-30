@@ -81,6 +81,10 @@
 			PlaceBuildings();
 			
 			AddElements();
+			
+			//TEMPORARY BOSS INSERTION
+			var boss : Boss = new Boss(100, 1000);
+			FlxG.state.add(boss);
 		}
 		
 		public function update() : void
@@ -123,7 +127,7 @@
 			
 			for (var i : int = 0; i < NUM_BLIMPS; i++)
 			{
-				var theX : int = Math.floor(Math.random() * 6400);
+				var theX : int = Math.floor(-600 + Math.random() * 1640);
 				var theY : int = Math.floor(Math.random() * 1240);
 				var ablimp : Blimp = new Blimp(theX, theY);
 				
