@@ -38,9 +38,51 @@
 			CheckGroundCollision();
 			CheckBoxCollision();
 			CheckStickHit();
+			CheckPoisonsCollision();
+			CheckSpikesCollision();
 			UpdateCamera();
 			
 			super.update();
+		}
+		
+		protected function CheckPoisonsCollision() : void
+		{
+			//Check for poison collision with Player
+			for (var i : int = 0; i < level1.poisons.members.length; i++)
+			{
+				level1.poisons.members[i].play("PoisonAnimation");
+				if (player.overlaps(level1.poisons.members[i]) == true) {
+					//slow down player
+					if (player.velocity.x > 0) {
+						player.velocity.x -= 600;
+						player.flicker(1.5); 
+					}
+					else {
+						//player.velocity.x += 40;
+						player.velocity.x += 600;
+						player.flicker(1.5); 
+					}
+				}
+			}
+		}
+		
+		protected function CheckSpikesCollision() : void
+		{
+			//Check for poison collision
+			for (var i : int = 0; i < level1.spikes.members.length; i++)
+			{
+				if (hoop.overlaps(level1.spikes.members[i]) == true) {
+					if (hoop.velocity.x > 0) {
+						hoop.velocity.x -= 100;
+						hoop.flicker(1.5); 
+					}
+					else {
+						//player.velocity.x += 40;
+						hoop.velocity.x += 100;
+						hoop.flicker(1.5); 
+					}
+				}
+			}
 		}
 		
 		protected function CheckGroundCollision() : void

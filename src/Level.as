@@ -17,12 +17,22 @@
 		[Embed(source = "../content/ground1-9.png")] protected var Ground9:Class;
 		[Embed(source = "../content/ground1-10.png")] protected var Ground10:Class;
 		
+
+		//poison gas
+		[Embed(source = "../content/gratesheet.png")] protected var Poison:Class;
+		[Embed(source = "../content/spikes.png")] protected var Spikes:Class;
+
 		[Embed(source = "../content/hoop.png")] protected var TestImage:Class;
+
 		
 		public static var LEVEL_HEIGHT : int = 1440;
 		
 		public var sky : FlxSprite;
 		public var grounds : FlxGroup;
+		public var poisons: FlxGroup;
+		public var spikes: FlxGroup;
+		
+		private var poisons1: FlxSprite;
 		
 		public var boxstacles : FlxGroup;
 		public var boxstacleTops : FlxGroup;
@@ -34,6 +44,39 @@
 			sky.loadGraphic(SkySprite, false, false, 640, 1440);
 			sky.scrollFactor.x = 0;
 			sky.solid = false;
+			
+			spikes = new FlxGroup();
+			//var spikes1: FlxSprite = new FlxSprite(250, 1250, Spikes);
+			//spikes.add(spikes1);
+			var spikes2: FlxSprite = new FlxSprite(640 * 4 + 350, 1310, Spikes);
+			spikes.add(spikes2);
+			
+			poisons = new FlxGroup();
+			//loadGraphic(Poison, true, true, 50, 100);
+			
+			//addAnimation("idle", [1,2,3]);
+			for (var i : int = 0; i < 5; i++)
+			{
+				if(i == 0){
+					poisons1 = new FlxSprite(640 * 1 + 205, 1250);
+				}
+				else if (i == 1) {
+					poisons1 = new FlxSprite(640 * 2 + 500, 1310);
+				}
+				else if (i == 2) {
+					poisons1 = new FlxSprite(640 * 2 + 600, 1310);
+				}
+				else if (i == 3) {
+					poisons1 = new FlxSprite(640 * 3 + 30, 1310);
+				}
+				else if (i == 4) {
+					poisons1 = new FlxSprite(640 * 3 + 150, 1310);
+				}
+				poisons1.loadGraphic(Poison, true, false, 50, 110);
+				poisons1.addAnimation("PoisonAnimation", [0,1,2],3);
+				poisons.add(poisons1);
+			}
+			
 			
 			grounds = new FlxGroup();
 			
@@ -82,7 +125,10 @@
 			
 			FlxG.state.add(boxstacleTops);
 			
+			FlxG.state.add(spikes);
+			
 			FlxG.state.add(grounds);
+			FlxG.state.add(poisons);
 			
 			FlxG.state.add(wrapper);
 		}
@@ -90,6 +136,7 @@
 		public function update() : void
 		{
 			//FlxG.log("" + grounds.members[0].facing);
+			poisons1.play("PlayAnimation");
 		}
 		
 		
