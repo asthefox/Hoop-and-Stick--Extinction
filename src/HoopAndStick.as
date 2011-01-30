@@ -6,12 +6,39 @@
 	
 	public class HoopAndStick extends FlxGame
 	{
+		public static const TITLE : int = 0;
+		public static const INTRO : int = 1;
+		public static const LEVEL1 : int = 2;
+		public static const ENDING : int = 3;
+		
+		public static var StateTypes : Array;
+		public static var StatePointer : int = 0;
+		
 		
 		public function HoopAndStick() 
 		{
 			super(640, 480, PlayState, 1);
+			//super(640, 480, TitleState, 1); // TODO: THIS IS THE REAL VERSION TO USE ONCE WE HAVE TITLE AND INTRO CUTSCENE
+			StatePointer = 2; //TODO: DELETE THIS LATER. Just need it for skipping the first states
+			
+			StateTypes = new Array();
+			StateTypes[TITLE] = TitleState;
+			StateTypes[INTRO] = IntroState;
+			StateTypes[LEVEL1] = PlayState;
+			StateTypes[ENDING] = EndingState;
 		}
 		
+		public static function ResetGame() : void
+		{
+			StatePointer = 0;
+			FlxG.state = new StateTypes[StatePointer]();
+		}
+		
+		public static function GetNextState() : void
+		{
+			StatePointer++;
+			FlxG.state = new StateTypes[StatePointer]();
+		}
 	}
 
 }
