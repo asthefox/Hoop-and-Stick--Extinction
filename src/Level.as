@@ -35,12 +35,16 @@
 		public var boxstacleTops : FlxGroup;
 		//public var wrapper : WrappingSprite;
 		
+		public var bowlingball : Bowlingball;
+		
 		public function Level() 
 		{
 			sky = new FlxSprite(0, 0);
 			sky.loadGraphic(SkySprite, false, false, 640, 1440);
 			sky.scrollFactor.x = 0;
 			sky.solid = false;
+			
+			bowlingball = new Bowlingball(400, 1250);
 			
 			spikes = new FlxGroup();
 			//var spikes1: FlxSprite = new FlxSprite(250, 1250, Spikes);
@@ -62,19 +66,6 @@
 			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
 			
 			AddElements();
-		}
-		
-		public function AddElements() : void
-		{
-			FlxG.state.add(sky);
-			FlxG.state.add(grounds);
-			FlxG.state.add(boxstacles);
-			FlxG.state.add(boxstacleTops);
-			FlxG.state.add(spikes);
-			FlxG.state.add(grounds);
-			FlxG.state.add(poisons);
-			
-			//FlxG.state.add(wrapper);
 		}
 		
 		public function update() : void
@@ -135,6 +126,19 @@
 			grounds.add(ground9);
 			var ground10 : Platform = new Platform(0 + 640*9, 1198, Ground10);
 			grounds.add(ground10);
+		}
+		
+		public function AddElements() : void
+		{
+			FlxG.state.add(sky);
+			FlxG.state.add(grounds);
+			FlxG.state.add(boxstacles);
+			FlxG.state.add(boxstacleTops);
+			FlxG.state.add(spikes);
+			FlxG.state.add(grounds);
+			FlxG.state.add(poisons);
+			FlxG.state.add(bowlingball);
+			//FlxG.state.add(wrapper);
 		}
 		
 	}
