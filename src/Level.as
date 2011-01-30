@@ -41,6 +41,8 @@
 		
 		public const NUM_BLIMPS : int = 20;
 		
+		public var boss : Boss;
+		
 		public var sky : FlxSprite;
 		public var blimps : FlxGroup;
 		public var buildings: FlxGroup;
@@ -89,7 +91,7 @@
 			AddElements();
 			
 			//TEMPORARY BOSS INSERTION
-			var boss : Boss = new Boss(6000);
+			boss = new Boss(6000);
 			FlxG.state.add(boss);
 		}
 		
@@ -244,13 +246,13 @@
 			{
 				//#2
 				if (i == 0) {
-					box01 = new Boxstacle(500, 1230);
-					boxTop01  = new BoxstacleTop(500, 1230);
+					box01 = new Boxstacle(500, 1260);
+					boxTop01  = new BoxstacleTop(500, 1260);
 					//poisons1 = new FlxSprite(640 * 1 + 205, 1250);
 				}
 				else if (i == 1) {
-					box01 = new Boxstacle(740, 1280);
-					boxTop01  = new BoxstacleTop(740, 1280);
+					box01 = new Boxstacle(740, 1270);
+					boxTop01  = new BoxstacleTop(740, 1270);
 				}
 				//#3 and 4
 				else if (i == 2) {

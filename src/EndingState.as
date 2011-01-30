@@ -7,12 +7,12 @@
 		[Embed(source = "../content/endscreen.png")] protected var EndScreen:Class;
 		public function EndingState() 
 		{
-			if (PlayState.end == true) {
-				var end1: FlxSprite = new FlxSprite(0, 0, EndScreen);
+			if (PlayState.win == true) {
+				var end1: FlxSprite = new FlxSprite(0, 0, WinScreen);
 				add(end1);
 			}
 			else{
-				var end2: FlxSprite = new FlxSprite(0, 0, WinScreen);
+				var end2: FlxSprite = new FlxSprite(0, 0, EndScreen);
 				add(end2);
 			}
 			
