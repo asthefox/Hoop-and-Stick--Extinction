@@ -28,13 +28,12 @@
 			
 			
 			add(player);
-			add(hoop);
-			
-			
+			add(hoop);			
 		}
 		
 		public override function update():void
 		{	
+			CheckBowlingCollision();
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
@@ -44,6 +43,33 @@
 			CheckInput();
 			
 			super.update();
+		}
+		
+		protected function CheckBowlingCollision() : void
+		{
+			if (level1.bowlingPins.exists)
+			{
+				//player-hoop-pin barrier
+				if (player.x > level1.bowlingPins.x)
+				{
+					player.x = level1.bowlingPins.x;
+				}
+				if (hoop.x > level1.bowlingPins.x)
+				{
+					hoop.x = level1.bowlingPins.x;
+				}
+				
+				if (FlxU.collide(level1.bowlingPins, level1.bowlingball))
+				{
+					level1.bowlingPins.strike();
+				}
+			}
+			
+			if (FlxU.solveXCollision(hoop,level1.bowlingball))
+			{
+				level1.bowlingball.hit = true;
+				FlxG.log("hit");
+			}
 		}
 		
 		protected function CheckPoisonsCollision() : void
@@ -95,6 +121,7 @@
 			{
 				if(player.collide(level1.grounds.members[i])) playerOnPlatform = true;
 				hoop.collide(level1.grounds.members[i]);
+				level1.bowlingball.collide(level1.grounds.members[i]);
 			}
 			
 			for (i = 0; i < level1.boxstacles.members.length; i++)
