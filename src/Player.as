@@ -29,8 +29,8 @@
 		protected static const PLAYER_RUN_SPEED:int = 100;
 		protected static const JUMP_ACCELERATION:Number = 330;
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
-		protected var PLAYER_START_X:int = 100;
-		protected var PLAYER_START_Y:int = 100;
+		//protected var PLAYER_START_X:int = 100;
+		//protected var PLAYER_START_Y:int = 100;
 		
 		public static const HORIZONTAL_HIT_FORCE:Number = 50;
 		public static const VERTICAL_HIT_FORCE:Number = 200;
@@ -48,14 +48,14 @@
 		public var stickDir : int = 0;		// Current direction that you're hitting the hoop in
 		public static const NONE : int = -1;
 		
-		public function Player()
+		public function Player(_X:int, _Y:int)
 		{
-			super(PLAYER_START_X, PLAYER_START_Y);
-			loadGraphic(PlayerImage, true, true, 48, 48);
+			super(_X, _Y);
+			loadGraphic(PlayerImage, true, true, 50, 100);
 			
 			//Setting animations
 			addAnimation("idle", [0]);
-			addAnimation("run", [0, 0, 0, 0], 10); 
+			addAnimation("run", [0, 1, 2, 3, 4], 5); 
 			addAnimation("jump", [0]);
 			addAnimation("fall", [0]);
 			addAnimation("swing", [0, 0, 0], 10);
@@ -68,12 +68,13 @@
 			maxVelocity.x = PLAYER_RUN_SPEED;
 			maxVelocity.y = JUMP_ACCELERATION;
 			acceleration.y = GRAVITY_ACCELERATION;
+
+			ROLL_ACCELERATION = 0;
+			FRICTION = 0;
 		}
 		
 		public override function update():void
 		{	
-			
-			
 			//Jumping/Falling/Landing state machine
 			if (FlxG.keys.justPressed(BUTTON_JUMP) && state == STATE_GROUND) {
 				//Jump!
@@ -99,10 +100,10 @@
 			{
 				acceleration.x = 0;
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
-					acceleration.x = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
+					force_acceleration = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
 				}
 				else if (FlxG.keys.pressed(BUTTON_RIGHT)) {
-					acceleration.x = drag.x * AIR_MOVEMENT_MULTIPLIER;
+					force_acceleration = drag.x * AIR_MOVEMENT_MULTIPLIER;
 				}
 			}
 			
@@ -110,24 +111,24 @@
 			if (state == STATE_FALL)
 			{
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
-					acceleration.x = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
+					force_acceleration = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
 				}
 				else if (FlxG.keys.pressed(BUTTON_RIGHT)) {
-					acceleration.x = drag.x * AIR_MOVEMENT_MULTIPLIER;
+					force_acceleration = drag.x * AIR_MOVEMENT_MULTIPLIER;
 				}
 			}
 			
 			//Handle movement for ground state
 			if (state == STATE_GROUND)
 			{
-				acceleration.x = 0;
+				force_acceleration = 0;
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
 					facing = LEFT; 
-					acceleration.x = -drag.x; 
+					force_acceleration = -drag.x; 
 				}
 				else if (FlxG.keys.pressed(BUTTON_RIGHT)) {
 					facing = RIGHT;
-					acceleration.x = drag.x;
+					force_acceleration = drag.x;
 				}
 			}
 			
