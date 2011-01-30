@@ -55,7 +55,7 @@
 			
 			//Setting animations
 			addAnimation("idle", [0]);
-			addAnimation("run", [0, 0, 0, 0], 10); 
+			addAnimation("run", [0, 1, 2, 3, 4], 5); 
 			addAnimation("jump", [0]);
 			addAnimation("fall", [0]);
 			addAnimation("swing", [0, 0, 0], 10);
