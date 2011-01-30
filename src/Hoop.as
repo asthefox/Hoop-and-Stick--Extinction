@@ -1,5 +1,7 @@
 ﻿package  
 {
+	import org.flixel.*;
+	
 	public class Hoop extends MobileSprite
 	{
 		//Flixel content
@@ -73,13 +75,19 @@
 			}
 			
 			// Handle spinning
-			
+			/*
 			angularVelocity = velocity.x * SPIN_MULTIPLIER;
 			angularDrag = SPIN_DRAG;
 			if (state == STATE_GROUND && angularVelocity > -45 && angularVelocity < 45) {
 				angle = 0;
 				angularVelocity = 0;
 			}
+			*/
+			
+			if (state == STATE_AIR) FlxG.log("In air");
+			else if (state == STATE_FALL) FlxG.log("Falling");
+			else if (state == STATE_GROUND) FlxG.log("On Ground");
+			else if (state == STATE_TIP) FlxG.log("Tipping");
 			
 			// Handle Animation
 			if (state == STATE_GROUND && angularVelocity == 0) {
