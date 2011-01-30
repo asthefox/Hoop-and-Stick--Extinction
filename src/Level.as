@@ -47,21 +47,11 @@
 			spikes = new FlxGroup();
 			//var spikes1: FlxSprite = new FlxSprite(250, 1250, Spikes);
 			//spikes.add(spikes1);
-			var spikes2: FlxSprite = new FlxSprite(640 * 4 + 350, 1310, Spikes);
+			var spikes2: FlxSprite = new FlxSprite(640 * 4 + 520, 1310, Spikes);
 			spikes.add(spikes2);
 			
 			PlacePoisons();
 			PlaceGrounds();
-			
-			boxstacles = new FlxGroup();
-			boxstacleTops = new FlxGroup();
-			
-			var box01 : Boxstacle = new Boxstacle(100, 1280);
-			var boxTop01 : BoxstacleTop = new BoxstacleTop(100, 1280);
-			boxstacles.add(box01);
-			boxstacleTops.add(boxTop01);
-			
-			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
 			
 			AddElements();
 		}
@@ -99,13 +89,13 @@
 					poisons1 = new FlxSprite(640 * 2 + 500, 1310);
 				}
 				else if (i == 2) {
-					poisons1 = new FlxSprite(640 * 2 + 600, 1310);
-				}
-				else if (i == 3) {
-					poisons1 = new FlxSprite(640 * 3 + 30, 1310);
+					poisons1 = new FlxSprite(640 * 3 + 150, 1310);
 				}
 				else if (i == 4) {
-					poisons1 = new FlxSprite(640 * 3 + 150, 1310);
+					poisons1 = new FlxSprite(5180, 1310);
+				}
+				else if (i == 3) {
+					poisons1 = new FlxSprite(4215, 1250);
 				}
 				poisons1.loadGraphic(Poison, true, false, 50, 110);
 				poisons1.addAnimation("PoisonAnimation", [0,1,2],3);
@@ -146,28 +136,73 @@
 			
 			for (var i : int = 0; i < 15; i++)
 			{
+				//#2
 				if (i == 0) {
 					box01 = new Boxstacle(700, 1280);
 					boxTop01  = new BoxstacleTop(700, 1280);
 					//poisons1 = new FlxSprite(640 * 1 + 205, 1250);
 				}
 				else if (i == 1) {
-					box01 = new Boxstacle(880, 1180);
-					boxTop01  = new BoxstacleTop(880, 1180);
+					box01 = new Boxstacle(840, 1180);
+					boxTop01  = new BoxstacleTop(840, 1180);
 				}
+				//#3 and 4
 				else if (i == 2) {
-					box01 = new Boxstacle(1670, 1280);
-					boxTop01  = new BoxstacleTop(1670, 1280);
+					box01 = new Boxstacle(1670, 1230);
+					boxTop01  = new BoxstacleTop(1670, 1230);
 				}
 				else if (i == 3) {
-					box01 = new Boxstacle(1850, 1180);
-					boxTop01  = new BoxstacleTop(1850, 1180);
+					box01 = new Boxstacle(1850, 1230);
+					boxTop01  = new BoxstacleTop(1850, 1230);
 				}
 				else if (i == 4) {
-					box01 = new Boxstacle(2030, 1180);
-					boxTop01  = new BoxstacleTop(2030, 1180);
+					box01 = new Boxstacle(2030, 1230);
+					boxTop01  = new BoxstacleTop(2030, 1230);
 				}
-				
+				//#5 & 6
+				else if (i == 5) {
+					box01 = new Boxstacle(2570, 1380);
+					boxTop01  = new BoxstacleTop(2570, 1380);
+				}
+				else if (i == 6) {
+					box01 = new Boxstacle(2640, 1280);
+					boxTop01  = new BoxstacleTop(2640, 1280);
+				}
+				else if (i == 7) {
+					box01 = new Boxstacle(2750, 1200);
+					boxTop01  = new BoxstacleTop(2750, 1200);
+				}
+				else if (i == 8) {
+					box01 = new Boxstacle(2900, 1300);
+					boxTop01  = new BoxstacleTop(2900, 1300);
+				}
+				//#7
+				else if (i == 9) {
+					box01 = new Boxstacle(3960, 1300);
+					boxTop01  = new BoxstacleTop(3960, 1300);
+				}
+				else if (i == 10) {
+					box01 = new Boxstacle(4020, 1250);
+					boxTop01  = new BoxstacleTop(4020, 1250);
+				}
+				else if (i == 11) {
+					box01 = new Boxstacle(4090, 1200);
+					boxTop01  = new BoxstacleTop(4090, 1200);
+				}
+				else if (i == 12) {
+					box01 = new Boxstacle(4280, 1150);
+					boxTop01  = new BoxstacleTop(4280, 1150);
+				}
+				//#8 & 9 
+				else if (i == 13) {
+					box01 = new Boxstacle(5000, 1280);
+					boxTop01  = new BoxstacleTop(5000, 1280);
+				}
+				else if (i == 14) {
+					box01 = new Boxstacle(5180, 1200);
+					boxTop01  = new BoxstacleTop(5180, 1200);
+				}
+
 				boxstacles.add(box01);
 				boxstacleTops.add(boxTop01);
 			}
@@ -175,7 +210,7 @@
 
 
 			
-			wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
+			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
 			
 			AddElements();
 			
