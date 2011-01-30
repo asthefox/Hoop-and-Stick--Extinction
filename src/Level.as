@@ -33,8 +33,8 @@
 		
 		public static var LEVEL_HEIGHT : int = 1440;
 		public const NUM_BUILDING_LOOPS : int = 4;
-		public const LITTLE_BUILDINGS_Y : int = 1082;
-		public const BIG_BUILDINGS_Y : int = 762;
+		public const LITTLE_BUILDINGS_Y : int = 1092;
+		public const BIG_BUILDINGS_Y : int = 772;
 		public const BIG_BUILDINGS_SPACING : int = 1600; // the buildings are 1280 wide
 		public const SCROLL_BUILDINGS_X : Number = 0.8; // Speed at which buildings scroll
 		public const SCROLL_BUILDINGS_Y : Number = 1; // Speed at which buildings scroll
@@ -89,7 +89,7 @@
 			AddElements();
 			
 			//TEMPORARY BOSS INSERTION
-			var boss : Boss = new Boss(100, 1000);
+			var boss : Boss = new Boss(6000);
 			FlxG.state.add(boss);
 		}
 		
