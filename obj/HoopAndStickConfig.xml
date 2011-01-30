@@ -4,14 +4,26 @@
 <flex-config>
   <target-player>10.0.0</target-player>
   <compiler>
+    <define append="true">
+      <name>CONFIG::debug</name>
+      <value>true</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::release</name>
+      <value>false</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::timeStamp</name>
+      <value>'1/29/2011'</value>
+    </define>
     <source-path append="true">
-      <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\src</path-element>
-      <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\flixel</path-element>
-      <path-element>D:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
+      <path-element>C:\Documents and Settings\kedar\My Documents\Hoop\Hoop-and-Stick--Extinction\src</path-element>
+      <path-element>C:\Documents and Settings\kedar\My Documents\Hoop\Hoop-and-Stick--Extinction\flixel</path-element>
+      <path-element>C:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
+    <path-element>C:\Documents and Settings\kedar\My Documents\Hoop\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

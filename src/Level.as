@@ -17,10 +17,16 @@
 		[Embed(source = "../content/ground1-9.png")] protected var Ground9:Class;
 		[Embed(source = "../content/ground1-10.png")] protected var Ground10:Class;
 		
+		//poison gas
+		[Embed(source = "../content/gratesheet.png")] protected var Poison:Class;
+		[Embed(source = "../content/spikes.png")] protected var Spikes:Class;
+		
 		public static var LEVEL_HEIGHT : int = 1440;
 		
 		public var sky : FlxSprite;
 		public var grounds : FlxGroup;
+		public var poisons: FlxGroup;
+		public var spikes: FlxGroup;
 		
 		public function Level() 
 		{
@@ -28,6 +34,28 @@
 			sky.loadGraphic(SkySprite, false, false, 640, 1440);
 			sky.scrollFactor.x = 0;
 			sky.solid = false;
+			
+			spikes = new FlxGroup();
+			var spikes1: FlxSprite = new FlxSprite(0 + 640 *0 + 300, 1198, Spikes);
+			spikes.add(spikes1);
+			
+			poisons = new FlxGroup();
+			
+			var poisons1: FlxSprite = new FlxSprite(0 + 640 * 0 + 848, 1198, Poison);
+			poisons.add(spikes1);
+			var poisons2: FlxSprite= new FlxSprite(0 + 640 * 1 + 50, 1198,Poison);
+			poisons.add(poisons2);
+			var poisons3: FlxSprite= new FlxSprite(0 + 640 * 2 + 50, 1198,Poison);
+			poisons.add(poisons3);
+			var poisons4: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
+			poisons.add(poisons4);
+			var poisons5: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
+			poisons.add(poisons5);
+			var poisons6: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
+			poisons.add(poisons6);
+			var poisons7: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
+			poisons.add(poisons7);
+			
 			
 			grounds = new FlxGroup();
 			
@@ -59,8 +87,8 @@
 		public function AddElements() : void
 		{
 			FlxG.state.add(sky);
-			
-			
+			FlxG.state.add(spikes);
+			FlxG.state.add(poisons);
 			FlxG.state.add(grounds);
 			
 
