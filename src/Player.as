@@ -33,7 +33,7 @@
 		//protected var PLAYER_START_X:int = 100;
 		//protected var PLAYER_START_Y:int = 100;
 		
-		public static const HORIZONTAL_HIT_FORCE:Number = 100;
+		public static const HORIZONTAL_HIT_FORCE:Number = 150;
 		public static const VERTICAL_HIT_FORCE:Number = 250;
 		public static const VERTICAL_HIT_DAMPEN:Number = 0.5;
 		
