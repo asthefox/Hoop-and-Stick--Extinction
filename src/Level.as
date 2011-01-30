@@ -36,11 +36,13 @@
 		public const LITTLE_BUILDINGS_Y : int = 1082;
 		public const BIG_BUILDINGS_Y : int = 762;
 		public const BIG_BUILDINGS_SPACING : int = 1600; // the buildings are 1280 wide
-		
 		public const SCROLL_BUILDINGS_X : Number = 0.8; // Speed at which buildings scroll
 		public const SCROLL_BUILDINGS_Y : Number = 1; // Speed at which buildings scroll
 		
+		public const NUM_BLIMPS : int = 20;
+		
 		public var sky : FlxSprite;
+		public var blimps : FlxGroup;
 		public var buildings: FlxGroup;
 		public var grounds : FlxGroup;
 		public var poisons: FlxGroup;
@@ -74,6 +76,7 @@
 			spikes.add(spikes2);
 			
 			PlacePoisons();
+			PlaceBlimps();
 			PlaceGrounds();
 			PlaceBuildings();
 			
@@ -111,6 +114,22 @@
 				poisons1.loadGraphic(Poison, true, false, 50, 110);
 				poisons1.addAnimation("PoisonAnimation", [0,1,2],3);
 				poisons.add(poisons1);
+			}
+		}
+		
+		public function PlaceBlimps() : void
+		{
+			blimps = new FlxGroup();
+			
+			for (var i : int = 0; i < NUM_BLIMPS; i++)
+			{
+				var theX : int = Math.floor(Math.random() * 6400);
+				var theY : int = Math.floor(Math.random() * 1240);
+				var ablimp : Blimp = new Blimp(theX, theY);
+				
+				var randFace : Number = Math.random() * 2;
+				if (randFace < 1) ablimp.facing = FlxSprite.LEFT;
+				blimps.add(ablimp);
 			}
 		}
 		
@@ -205,7 +224,6 @@
 			grounds.add(ground9);
 			var ground10 : Platform = new Platform(0 + 640*9, 1198, Ground10);
 			grounds.add(ground10);
-
 			
 			boxstacles = new FlxGroup();
 			boxstacleTops = new FlxGroup();
@@ -288,14 +306,12 @@
 			
 			//wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
 			
-			AddElements();
-			
-
 		}
 		
 		public function AddElements() : void
 		{
 			FlxG.state.add(sky);
+			FlxG.state.add(blimps);
 			FlxG.state.add(buildings);
 			FlxG.state.add(grounds);
 			FlxG.state.add(boxstacles);
