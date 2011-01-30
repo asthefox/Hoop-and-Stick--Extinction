@@ -5,7 +5,6 @@
 	public class Level
 	{
 		[Embed(source = "../content/sky.png")] protected var SkySprite:Class;
-		[Embed(source = "../content/level1ground.png")] protected var Ground:Class;
 		[Embed(source = "../content/ground1-1.png")] protected var Ground1:Class;
 		[Embed(source = "../content/ground1-2.png")] protected var Ground2:Class;
 		[Embed(source = "../content/ground1-3.png")] protected var Ground3:Class;
@@ -17,14 +16,32 @@
 		[Embed(source = "../content/ground1-9.png")] protected var Ground9:Class;
 		[Embed(source = "../content/ground1-10.png")] protected var Ground10:Class;
 		
+		[Embed(source = "../content/HugeBuildingsLow.png")] protected var BuildingHugeLow:Class;
+		[Embed(source = "../content/HugeBuildingsHigh.png")] protected var BuildingHugeHigh:Class;
+		[Embed(source = "../content/SmallBuilding1.png")] protected var BuildingSmall1:Class;
+		[Embed(source = "../content/SmallBuilding2.png")] protected var BuildingSmall2:Class;
+		[Embed(source = "../content/SmallBuilding3.png")] protected var BuildingSmall3:Class;
+		[Embed(source = "../content/SmallBuilding4.png")] protected var BuildingSmall4:Class;
+		[Embed(source = "../content/SmallBuilding5.png")] protected var BuildingSmall5:Class;
+		[Embed(source = "../content/SmallBuilding6.png")] protected var BuildingSmall6:Class;
+		[Embed(source = "../content/SmallBuilding7.png")] protected var BuildingSmall7:Class;
+		
 		//poison gas
 		[Embed(source = "../content/gratesheet.png")] protected var Poison:Class;
 		[Embed(source = "../content/spikes.png")] protected var Spikes:Class;
 		[Embed(source = "../content/hoop.png")] protected var TestImage:Class;
 		
 		public static var LEVEL_HEIGHT : int = 1440;
+		public const NUM_BUILDING_LOOPS : int = 4;
+		public const LITTLE_BUILDINGS_Y : int = 1082;
+		public const BIG_BUILDINGS_Y : int = 762;
+		public const BIG_BUILDINGS_SPACING : int = 1600; // the buildings are 1280 wide
+		
+		public const SCROLL_BUILDINGS_X : Number = 0.8; // Speed at which buildings scroll
+		public const SCROLL_BUILDINGS_Y : Number = 1; // Speed at which buildings scroll
 		
 		public var sky : FlxSprite;
+		public var buildings: FlxGroup;
 		public var grounds : FlxGroup;
 		public var poisons: FlxGroup;
 		public var spikes: FlxGroup;
@@ -50,6 +67,7 @@
 			
 			PlacePoisons();
 			PlaceGrounds();
+			PlaceBuildings();
 			
 			boxstacles = new FlxGroup();
 			boxstacleTops = new FlxGroup();
@@ -67,6 +85,7 @@
 		public function AddElements() : void
 		{
 			FlxG.state.add(sky);
+			FlxG.state.add(buildings);
 			FlxG.state.add(grounds);
 			FlxG.state.add(boxstacles);
 			FlxG.state.add(boxstacleTops);
@@ -109,6 +128,73 @@
 				poisons1.addAnimation("PoisonAnimation", [0,1,2],3);
 				poisons.add(poisons1);
 			}
+		}
+		
+		public function PlaceBuildings() : void
+		{
+			buildings = new FlxGroup();
+			
+			for (var i:int = 0; i < NUM_BUILDING_LOOPS; i++)
+			{
+				for (var k:int = 0; k < 2; k++)
+				{
+					var little : FlxSprite = new FlxSprite(540 + BIG_BUILDINGS_SPACING * i + (k * 300), LITTLE_BUILDINGS_Y);
+					var picker : int = new int(Math.ceil(Math.random() * 7));
+					switch (picker)
+					{
+						case 1:
+							little.loadGraphic(BuildingSmall1);
+							break;
+						case 2:
+							little.loadGraphic(BuildingSmall2);
+							break;
+						case 3:
+							little.loadGraphic(BuildingSmall3);
+							little.y -= 160;
+							break;
+						case 4:
+							little.loadGraphic(BuildingSmall4);
+							break;
+						case 5:
+							little.loadGraphic(BuildingSmall5);
+							break;
+						case 6:
+							little.loadGraphic(BuildingSmall6);
+							break;
+						case 7:
+							little.loadGraphic(BuildingSmall7);
+							break;
+						default:
+							little.loadGraphic(BuildingSmall1);
+							break;
+					}
+					little.scrollFactor.x = SCROLL_BUILDINGS_X;
+					little.scrollFactor.y = SCROLL_BUILDINGS_Y;
+					buildings.add(little);
+				}
+			}
+			
+			
+			for (i = 0; i < NUM_BUILDING_LOOPS / 2 + 1; i++)
+			{
+				var bigHigh : FlxSprite = new FlxSprite( -640 + BIG_BUILDINGS_SPACING * i * 2, BIG_BUILDINGS_Y);
+				bigHigh.loadGraphic(BuildingHugeHigh);
+				bigHigh.scrollFactor.x = SCROLL_BUILDINGS_X;
+				bigHigh.scrollFactor.y = SCROLL_BUILDINGS_Y;
+				buildings.add(bigHigh);
+			}
+			
+			for (i = 0; i < NUM_BUILDING_LOOPS / 2; i++)
+			{
+				var bigLow : FlxSprite = new FlxSprite( -640 + BIG_BUILDINGS_SPACING + BIG_BUILDINGS_SPACING * i * 2, BIG_BUILDINGS_Y);
+				bigLow.loadGraphic(BuildingHugeLow);
+				bigLow.scrollFactor.x = SCROLL_BUILDINGS_X;
+				bigLow.scrollFactor.y = SCROLL_BUILDINGS_Y;
+				buildings.add(bigLow);
+			}
+			
+			
+			
 		}
 		
 		public function PlaceGrounds() : void
