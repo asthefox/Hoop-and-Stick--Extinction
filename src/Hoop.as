@@ -48,6 +48,7 @@
 			
 			ROLL_ACCELERATION = 300;
 			FRICTION = 20;
+			GRAVITY_ACCELERATION = 400;
 			
 			ground_buffer = 9;
 		}
