@@ -16,6 +16,14 @@
 	{
 		
 		protected static const GRAVITY_ACCELERATION:Number = 820;
+
+		protected var MIN_SLOPE : Number = 0.1;			//Minimum slope that causes rolling
+		protected var ROLL_ACCELERATION : Number = 1;	//Rolling acceleration rate
+		protected var MAX_ROLL_SPEED : Number = 100;	//Max rolling speed
+		protected var FRICTION:Number = 20;
+		
+		protected var slope_acceleration : Number = 0;
+		protected var force_acceleration : Number = 0;
 		
 		public function MobileSprite(X:Number=0,Y:Number=0, SimpleGraphic:Class=null)
 		{
@@ -25,8 +33,23 @@
 		public override function update():void
 		{
 			//Kills vertical speed when on floor, necessary to prevent jitteriness
-			acceleration.y = onFloor ? 0 : GRAVITY_ACCELERATION;
-			velocity.y = onFloor ? 0 : velocity.y;
+			acceleration.y = GRAVITY_ACCELERATION;
+			velocity.y = velocity.y;
+			
+			acceleration.x = force_acceleration;
+			if (onFloor) {
+				acceleration.y = 0;
+				velocity.y = 0;
+				
+				acceleration.x += slope_acceleration;
+				
+				if (velocity.x > 0) {
+					acceleration.x -= FRICTION;
+				} else if (velocity.x < 0) {
+					acceleration.x += FRICTION;
+				}
+				
+			}
 			
 			super.update();
 		}
@@ -50,13 +73,15 @@
 				//Yes
 				var ObjectPP : Platform = Object as Platform;
 				
-				if(this is Player) DetermineSlope(ObjectPP);
+				if(ROLL_ACCELERATION != 0) DetermineSlope(ObjectPP);
 				
-				if (FlxHitTest.complexHitTestObject(this, ObjectPP))
+				if(FlxHitTest.complexHitTestPoint(ObjectPP, this.x+width/2, this.y+height))
 				{
 					onFloor = true;
 					hitBottom(ObjectPP, 0);
 					ObjectPP.hitTop(this, 0);
+					
+					
 					
 					//There's some jittery wonkiness with slopes - this smooths it out by adding a 2-pixel buffer zone					
 					var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
@@ -93,44 +118,26 @@
 			
 			var slope:Number = (dy1 - dy2) / (x2 - x1);
 			
-			if(this is Player) FlxG.log("y1 = " + dy1 + "; y2= " + dy2 + "slope = " + slope);
+			Slide(slope);
 			
+			//if(this is Player) FlxG.log("y1 = " + dy1 + "; y2= " + dy2 + "slope = " + slope);
 		}
 		
-		//This is some stuff from Justin's code.  Not using it now , but keeping it in case it's useful for the hoop sliding later.
-		public function slip(object:Platform):Boolean
+		public function Slide(slope:Number):void
 		{
-			/*
-			var slipLeft = true;
-			var slipRight = true;
-			
-				if(terrain.hitTestPoint(object.x+x+3,object.y+3,true))
-				{
-					slipRight = false;
-				}
-				if(terrain.hitTestPoint(object.x+x-3,object.y+3,true))
-				{
-					slipLeft = false;
-				}
-			
-			var slideRate = .5
-			if(slipRight)
+			if (Math.abs(slope) > MIN_SLOPE)
 			{
-				object.xspeed+=slideRate
-				return true
+				FlxG.log("should roll");
+				slope_acceleration = slope * -1 * ROLL_ACCELERATION;
 			}
-			if(slipLeft)
+			else
 			{
-				object.xspeed-=slideRate
-				return true
+				FlxG.log("should not roll");
+				slope_acceleration = 0;
 			}
-			*/
-			return false;
-			
 		}
-		
-		
-		
 	}
+	
+
 
 }

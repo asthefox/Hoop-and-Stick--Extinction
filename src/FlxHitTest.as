@@ -22,8 +22,10 @@
 			
 			public static function complexHitTestPoint( target1:FlxSprite, x:int, y:int):Boolean
 			{
+				//FlxG.log("checking (" + x + ","+ y + ")");
 				var point:FlxSprite = new Pixel(x, y);
-				return complexHitTestObject(point, target1);
+				var res : Boolean =  complexHitTestObject(point, target1);
+				return res;
 			}
 			
 			public static function complexHitTestObject( target1:FlxSprite, target2:FlxSprite,  accurracy:Number = 1 ):Boolean

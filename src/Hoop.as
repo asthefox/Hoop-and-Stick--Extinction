@@ -6,12 +6,10 @@
 		[Embed(source = "../content/hoop.png")] protected var HoopImage:Class;
 			
 		//Tweakable movement/physics variables
-		protected static const HOOP_ROLL_SPEED:int = 100;
-		protected static const JUMP_ACCELERATION:Number = 330;
+		protected var JUMP_ACCELERATION:Number = 330;
 		
 		protected static const SPIN_MULTIPLIER:Number = 9;
 		protected static const SPIN_DRAG:Number = 500; //240;
-		protected static const FRICTION:Number = 40;
 		
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
 		protected var HOOP_START_X:int = 100;
@@ -27,8 +25,6 @@
 		public var state : int = 0;			// State to keep track of how movement should work
 		public var hit : Boolean = false;		
 		public var bounced : Boolean = false;
-		//public var dx : Number = 0;
-		//public var dy : Number = 0;
 		public var rot : Number = 0; 		// positive is clockwise
 		
 		
@@ -45,17 +41,16 @@
 			addAnimationCallback(AnimationHandler);
 			
 			
-			//Initializing Physics
+			//Initializing Physics - TWEAK VALUES HERE!
 			state = STATE_AIR;
 			acceleration.y = GRAVITY_ACCELERATION;
+			
+			ROLL_ACCELERATION = 300;
+			FRICTION = 20;
 		}
 		
 		public override function update():void
 		{
-			acceleration.x = 0;
-			//angularAcceleration = 0;
-			//angularDrag = 0;
-			
 			// Handle changing of states
 			if (onFloor) {
 				state = STATE_GROUND;
@@ -67,8 +62,6 @@
 				if (velocity.y < 0)
 				{
 					state = STATE_AIR;
-					//velocity.x = dx;
-					//velocity.y = dy;
 					onFloor = false;
 				}
 			}
@@ -76,30 +69,7 @@
 			if (bounced) {
 				bounced = false;
 				state = STATE_AIR;
-				//velocity.x = dx;
-				//velocity.y = dy;
 				onFloor = false;
-			}
-			
-			// Apply Gravity
-			acceleration.y = GRAVITY_ACCELERATION;
-			
-			// Handle States (friction mostly)
-			if (state == STATE_GROUND) {
-
-				acceleration.y = 0;
-				velocity.y = 0;
-				
-				//FlxG.log("Ball Down!!!!!!!!");
-				if (velocity.x > 0) {
-					acceleration.x = -FRICTION;
-				} else if (velocity.x < 0) {
-					acceleration.x = FRICTION;
-				}
-			}
-			
-			if (state == STATE_AIR) {
-				
 			}
 			
 			// Handle spinning
@@ -110,7 +80,6 @@
 				angle = 0;
 				angularVelocity = 0;
 			}
-			
 			
 			// Handle Animation
 			if (state == STATE_GROUND && angularVelocity == 0) {

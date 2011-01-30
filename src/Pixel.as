@@ -8,6 +8,8 @@
 		public function Pixel(X:int, Y:int) 
 		{
 			super(X, Y, PixelImage);
+			this.scale.x = 2;
+			this.scale.y = 2;
 		}
 		
 	}

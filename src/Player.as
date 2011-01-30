@@ -68,12 +68,13 @@
 			maxVelocity.x = PLAYER_RUN_SPEED;
 			maxVelocity.y = JUMP_ACCELERATION;
 			acceleration.y = GRAVITY_ACCELERATION;
+
+			ROLL_ACCELERATION = 0;
+			FRICTION = 0;
 		}
 		
 		public override function update():void
 		{	
-			
-			
 			//Jumping/Falling/Landing state machine
 			if (FlxG.keys.justPressed(BUTTON_JUMP) && state == STATE_GROUND) {
 				//Jump!
@@ -99,10 +100,10 @@
 			{
 				acceleration.x = 0;
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
-					acceleration.x = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
+					force_acceleration = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
 				}
 				else if (FlxG.keys.pressed(BUTTON_RIGHT)) {
-					acceleration.x = drag.x * AIR_MOVEMENT_MULTIPLIER;
+					force_acceleration = drag.x * AIR_MOVEMENT_MULTIPLIER;
 				}
 			}
 			
@@ -110,24 +111,24 @@
 			if (state == STATE_FALL)
 			{
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
-					acceleration.x = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
+					force_acceleration = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
 				}
 				else if (FlxG.keys.pressed(BUTTON_RIGHT)) {
-					acceleration.x = drag.x * AIR_MOVEMENT_MULTIPLIER;
+					force_acceleration = drag.x * AIR_MOVEMENT_MULTIPLIER;
 				}
 			}
 			
 			//Handle movement for ground state
 			if (state == STATE_GROUND)
 			{
-				acceleration.x = 0;
+				force_acceleration = 0;
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
 					facing = LEFT; 
-					acceleration.x = -drag.x; 
+					force_acceleration = -drag.x; 
 				}
 				else if (FlxG.keys.pressed(BUTTON_RIGHT)) {
 					facing = RIGHT;
-					acceleration.x = drag.x;
+					force_acceleration = drag.x;
 				}
 			}
 			
