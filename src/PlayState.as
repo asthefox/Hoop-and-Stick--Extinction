@@ -21,7 +21,7 @@
 			player = new Player(100, 960);
 			hoop = new Hoop(100, 960);
 			
-			//Set World bounds. NOTE: this is done in UpdateCamera now
+			//World bounds are set in UpdateCamera now
 			//TODO: Change this once we finalize the level design
 			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
@@ -35,11 +35,12 @@
 		{	
 			CheckBowlingCollision();
 			CheckGroundCollision();
-			CheckBoxCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
 			UpdateCamera();
+			
+			CheckInput();
 			
 			super.update();
 		}
@@ -95,20 +96,19 @@
 		
 		protected function CheckGroundCollision() : void
 		{
+			var playerOnPlatform : Boolean = false;
+			
 			//Check for ground collision
 			for (var i : int = 0; i < level1.grounds.members.length; i++)
 			{
-				player.collide(level1.grounds.members[i]);
+				if(player.collide(level1.grounds.members[i])) playerOnPlatform = true;
 				hoop.collide(level1.grounds.members[i]);
 				level1.bowlingball.collide(level1.grounds.members[i]);
 			}
-		}
-		
-		protected function CheckBoxCollision():void
-		{
-			for (var i : int = 0; i < level1.boxstacles.members.length; i++)
+			
+			for (i = 0; i < level1.boxstacles.members.length; i++)
 			{
-				player.collide(level1.boxstacleTops.members[i]);
+				if(player.collide(level1.boxstacleTops.members[i])) playerOnPlatform = true;
 				hoop.collide(level1.boxstacleTops.members[i]);
 
 				FlxU.solveXCollision(hoop,level1.boxstacles.members[i]);
@@ -116,6 +116,15 @@
 				
 				FlxU.solveXCollision(player,level1.boxstacles.members[i]);
 				FlxU.solveYCollision(player,level1.boxstacles.members[i]);
+			}
+			
+			if (!playerOnPlatform)
+			{
+			//	if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
+			//{
+				//FlxG.log("Fall!");
+				player.Fall();
+			//}
 			}
 		}
 		
@@ -170,7 +179,15 @@
 			
 			FlxG.follow(player, 100);
 			//FlxG.followAdjust(0.5, 0); 
-			//FlxG.followBounds(0, 0, 6400, 960, true); //also sets world bounds
+			FlxG.followBounds(0, 0, 6400, 1440, true); //also sets world bounds
+		}
+		
+		public function CheckInput() : void
+		{
+			if (FlxG.keys.justPressed("ENTER"))
+			{
+				HoopAndStick.GetNextState();
+			}
 		}
 	}
 }

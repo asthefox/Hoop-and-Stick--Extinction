@@ -78,12 +78,16 @@
 		public override function update():void
 		{		
 			//Jumping/Falling/Landing state machine
-			if (FlxG.keys.justPressed(BUTTON_JUMP) && state == STATE_GROUND) {
-				//Jump!
-				//FlxG.play(SndJump);
-				velocity.y = -JUMP_ACCELERATION;
-				state = STATE_JUMP;
-				onFloor = false;
+			if (FlxG.keys.justPressed(BUTTON_JUMP))
+			{
+				FlxG.log("tryin ta jump: " + state);
+				if(state == STATE_GROUND) {
+					//Jump!
+					//FlxG.play(SndJump);
+					velocity.y = -JUMP_ACCELERATION;
+					state = STATE_JUMP;
+					onFloor = false;
+				}
 			}
 			
 			else if (onFloor && (state == STATE_FALL || state == STATE_JUMP))
@@ -166,13 +170,13 @@
 			}
 			
 			//Super-Verbose Debug
-			
+			/*
 			if (state == STATE_SWING) FlxG.log("Swinging");
 			else if (state == STATE_FALL) FlxG.log("Falling");
 			else if (state == STATE_GROUND) FlxG.log("On Ground");
 			else if (state == STATE_JUMP) FlxG.log("Jumping");
 			else if (state == STATE_STUN) FlxG.log("Stunned");
-			
+			*/
 			
 			//Update animation based on state
 			if (state == STATE_JUMP) {
