@@ -33,7 +33,7 @@
 		
 		public override function update():void
 		{	
-			//CheckBowlingCollision();
+			CheckBowlingCollision();
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
