@@ -59,7 +59,7 @@
 			addAnimation("run", [0, 1, 2, 3, 4, 5], 5); 
 			addAnimation("jump", [7]);
 			addAnimation("fall", [0]);
-			addAnimation("swing", [8, 9, 10, 10, 0], 5, false);
+			addAnimation("swing", [8, 9, 10, 0], 5, false);
 			addAnimation("stun", [0]);
 			addAnimationCallback(AnimationHandler);
 			
@@ -122,7 +122,7 @@
 			}
 			
 			//Handle movement for ground state
-			if (state == STATE_GROUND)
+			if (state == STATE_GROUND || state == STATE_SWING)
 			{
 				force_acceleration = 0;
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
