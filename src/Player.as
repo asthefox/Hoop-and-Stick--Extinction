@@ -51,7 +51,7 @@
 		public function Player()
 		{
 			super(PLAYER_START_X, PLAYER_START_Y);
-			loadGraphic(PlayerImage, true, true, 48, 48);
+			loadGraphic(PlayerImage, true, true, 50, 100);
 			
 			//Setting animations
 			addAnimation("idle", [0]);

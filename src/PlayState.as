@@ -91,12 +91,12 @@
 			if (player.facing == FlxSprite.LEFT)
 			{
 				cameraPoint.x -= CAMERA_LEAD_X;
-				FlxG.log("facing left");
+				//FlxG.log("facing left");
 			}
 			else if (player.facing == FlxSprite.RIGHT)
 			{
 				cameraPoint.x += CAMERA_LEAD_X;
-				FlxG.log("facing right");
+				//FlxG.log("facing right");
 			}
 			
 			

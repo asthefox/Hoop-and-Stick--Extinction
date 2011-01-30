@@ -127,12 +127,12 @@
 		{
 			if (Math.abs(slope) > MIN_SLOPE)
 			{
-				FlxG.log("should roll");
+				//FlxG.log("should roll");
 				slope_acceleration = slope * -1 * ROLL_ACCELERATION;
 			}
 			else
 			{
-				FlxG.log("should not roll");
+				//FlxG.log("should not roll");
 				slope_acceleration = 0;
 			}
 		}
