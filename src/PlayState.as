@@ -58,7 +58,7 @@
 		protected function CheckStickHit() : void {
 			//Check for hoop and stick collision
 			//Is player swinging?
-			if (player.state == Player.STATE_SWING)
+			if (player.state == Player.STATE_SWING && hoop.state != Hoop.STATE_LOSE)
 			{
 				//Has player hit hoop for the first time this swing?
 				if (player.stickDir != Player.NONE && FlxHitTest.complexHitTestObject(player, hoop))
