@@ -5,32 +5,28 @@
 	public class PlayState extends FlxState
 	{
 		//Embedding Flixel images into classes
-		[Embed(source = "../content/level1ground.png")] 	protected var Ground:Class;
-		[Embed(source = "../content/level1bg.png")] protected var BG:Class;
 		
-		protected var bg : FlxSprite;
-		protected var ground : FlxSprite;
+		protected var level1 : Level;
+		
 		protected var player : Player;
 		protected var hoop : Hoop;
 		protected var cameraPoint : FlxObject = null;
+		protected const CAMERA_LEAD_X : int = 30;
+		protected const CAMERA_LEAD_Y : int = 30;
 		
 		override public function create():void
 		{	
-			bg = new FlxSprite(0, 0, BG);
-			bg.solid = false;
-			
-			ground = new Platform(0, 0, Ground);
+			level1 = new Level();
 			
 			player = new Player();
 			hoop = new Hoop();
 			
-			//Set World bounds. 
+			//Set World bounds. NOTE: this is done in UpdateCamera now
 			//TODO: Change this once we finalize the level design
-			FlxU.setWorldBounds(0, 0, 6400, 960);
+			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
-			add(bg);
-			add(ground);
+			
 			add(player);
 			add(hoop);
 			
@@ -49,8 +45,8 @@
 		protected function CheckGroundCollision() : void
 		{
 			//Check for ground collision
-			player.collide(ground);
-			hoop.collide(ground);
+			player.collide(level1.ground);
+			hoop.collide(level1.ground);
 		}
 		
 		protected function CheckStickHit() : void {
@@ -89,11 +85,24 @@
 		
 		protected function UpdateCamera():void
 		{
-			//cameraPoint.x = player1.x;
-			//cameraPoint.y = FlxG.height / 2;
-			//FlxG.follow(cameraPoint); 
-			//FlxG.followAdjust(0.0, 0.0); 
-			//FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);
+			cameraPoint.x = player.x;
+			cameraPoint.y = player.y - 50; //FlxG.height / 2;
+			
+			if (player.facing == FlxSprite.LEFT)
+			{
+				cameraPoint.x -= CAMERA_LEAD_X;
+				FlxG.log("facing left");
+			}
+			else if (player.facing == FlxSprite.RIGHT)
+			{
+				cameraPoint.x += CAMERA_LEAD_X;
+				FlxG.log("facing right");
+			}
+			
+			
+			FlxG.follow(player, 100);
+			//FlxG.followAdjust(0.5, 0); 
+			//FlxG.followBounds(0, 0, 6400, 960, true); //also sets world bounds
 		}
 	}
 }
