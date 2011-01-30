@@ -17,10 +17,14 @@
 		[Embed(source = "../content/ground1-9.png")] protected var Ground9:Class;
 		[Embed(source = "../content/ground1-10.png")] protected var Ground10:Class;
 		
+		[Embed(source = "../content/hoop.png")] protected var TestImage:Class;
+		
 		public static var LEVEL_HEIGHT : int = 1440;
 		
 		public var sky : FlxSprite;
 		public var grounds : FlxGroup;
+		
+		public var wrapper : WrappingSprite;
 		
 		public function Level() 
 		{
@@ -52,6 +56,9 @@
 			var ground10 : Platform = new Platform(0 + 640*9, 1198, Ground10);
 			grounds.add(ground10);
 			
+			wrapper = new WrappingSprite(300, 100, 48, 48, TestImage, 3, 0, 0, 2);
+			
+			
 			AddElements();
 			
 		}
@@ -59,11 +66,9 @@
 		public function AddElements() : void
 		{
 			FlxG.state.add(sky);
-			
-			
 			FlxG.state.add(grounds);
 			
-
+			FlxG.state.add(wrapper);
 		}
 		
 		public function update() : void
