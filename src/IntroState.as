@@ -74,13 +74,13 @@
 			var blimp01:Blimp = new Blimp(-200, 180);
 			blimp01.scale.x = .4;
 			blimp01.scale.y = .4;
-			blimp01.velocity.x = 15;
+			blimp01.velocity.x = 7;
 			blimps.add(blimp01);
 			
 			var blimp02:Blimp = new Blimp(-400, 220);
 			blimp02.scale.x = .5;
 			blimp02.scale.y = .5;
-			blimp02.velocity.x = 20;
+			blimp02.velocity.x = 17;
 			blimps.add(blimp02);
 			
 			var blimp03:Blimp = new Blimp(-800, 150);
