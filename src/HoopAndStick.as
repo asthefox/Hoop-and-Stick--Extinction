@@ -17,6 +17,7 @@
 		
 		public function HoopAndStick() 
 		{
+			//super(640, 480, PlayState, 1);
 			super(640, 480, TitleState, 1);
 			//super(640, 480, PlayState, 1);
 			//super(640, 480, TitleState, 1); // TODO: THIS IS THE REAL VERSION TO USE ONCE WE HAVE TITLE AND INTRO CUTSCENE
@@ -41,5 +42,4 @@
 			FlxG.state = new StateTypes[StatePointer]();
 		}
 	}
-
 }

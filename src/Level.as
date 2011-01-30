@@ -68,8 +68,8 @@
 			sky.scrollFactor.x = 0;
 			sky.solid = false;
 			
-			bowlingball = new Bowlingball(1200, 1000);
-			bowlingPins = new BowlingPins(1420, 1070);
+			bowlingball = new Bowlingball(1160, 800);
+			bowlingPins = new BowlingPins(1340, 1070);
 			
 			shootingSituation = new ShootingSituation();
 			shootingSituation.y = 1000;
@@ -308,6 +308,13 @@
 					box01 = new Boxstacle(5180, 1200);
 					boxTop01  = new BoxstacleTop(5180, 1200);
 				}
+				
+				/*bowling ball platform (referenced explicitly by collision code -- DON'T CHANGE!!!)
+				else if (i == 15) {
+					box01 = new Boxstacle(1150, 1170);
+					boxTop01  = new BoxstacleTop(1150, 1170);
+				}
+				*/
 
 				boxstacles.add(box01);
 				boxstacleTops.add(boxTop01);
