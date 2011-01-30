@@ -11,6 +11,7 @@
 		public var player : Player;
 		public var hoop : Hoop;
 		public static var end: Boolean = false;
+		public static var playerhoopoverlap: Boolean; 
 		
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
@@ -41,6 +42,13 @@
 		
 		public override function update():void
 		{	
+			//Check for hoop and stick collision
+			if (player.overlaps(hoop)== true) {
+				playerhoopoverlap = true;
+			}
+			else if(player.overlaps(hoop)== false){
+					playerhoopoverlap = false;
+			}
 			
 			CheckBowlingCollision();
 			CheckGroundCollision();
@@ -244,7 +252,8 @@
 		}
 		
 		protected function CheckStickHit() : void {
-			//Check for hoop and stick collision
+
+			
 			//Is player swinging?
 			if (player.state == Player.STATE_SWING && hoop.state != Hoop.STATE_LOSE)
 			{

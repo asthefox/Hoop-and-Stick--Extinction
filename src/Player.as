@@ -192,7 +192,12 @@
 			} else if (state == STATE_STUN) {
 				play("stun");
 			} else if (state == STATE_SWING) {
-				play("swing");
+				if (PlayState.playerhoopoverlap == true) {
+					play("swing");
+				}
+				else if(PlayState.playerhoopoverlap == false){
+					play("swingF");
+				}
 			}
 			
 			super.update();
@@ -209,6 +214,10 @@
 				state = STATE_GROUND;
 			}
 			if (state == STATE_STUN && (_name == "stun"))// && (_fnum == 2))
+			{
+				state = STATE_GROUND;
+			}
+			if (state == STATE_SWING && (_name == "swingF") && (_fnum >= 3))
 			{
 				state = STATE_GROUND;
 			}
