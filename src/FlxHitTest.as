@@ -28,6 +28,15 @@
 				return res;
 			}
 			
+			public static function complexHitTestSlice( target1:FlxSprite, x:int, y:int):Rectangle
+			{
+				//FlxG.log("checking (" + x + ","+ y + ")");
+				var point:FlxSprite = new Pixel(x, y);
+				point.scale.y = 30;
+				point.y -= 15;
+				return complexHitTestRectangle(point, target1);
+			}
+			
 			public static function complexHitTestObject( target1:FlxSprite, target2:FlxSprite,  accurracy:Number = 1 ):Boolean
 			{
 				var bitmap1:Bitmap = flxspriteToBitmap(target1);

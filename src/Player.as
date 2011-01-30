@@ -13,7 +13,7 @@
 	public class Player extends MobileSprite
 	{
 		//Flixel content
-		[Embed(source = "../content/PlayerAnim2.png")] protected var PlayerImage:Class;
+		[Embed(source = "../content/PlayerAnim3.png")] protected var PlayerImage:Class;
 		
 		//Input buttons
 		protected var BUTTON_JUMP:String = "W";
@@ -26,14 +26,15 @@
 		protected var BUTTON_STICK_DOWN:String = "DOWN";
 		
 		//Tweakable movement/physics variables
-		protected static const PLAYER_RUN_SPEED:int = 100;
-		protected static const JUMP_ACCELERATION:Number = 500;
-		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
+		protected static const PLAYER_RUN_SPEED:int = 200;
+		protected static const JUMP_ACCELERATION:Number = 350;
+		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.75;
+		protected static const FALL_THRESHHOLD:int = 1;
 		//protected var PLAYER_START_X:int = 100;
 		//protected var PLAYER_START_Y:int = 100;
 		
-		public static const HORIZONTAL_HIT_FORCE:Number = 50;
-		public static const VERTICAL_HIT_FORCE:Number = 200;
+		public static const HORIZONTAL_HIT_FORCE:Number = 100;
+		public static const VERTICAL_HIT_FORCE:Number = 250;
 		public static const VERTICAL_HIT_DAMPEN:Number = 0.5;
 		
 		//State Machine!
@@ -58,7 +59,7 @@
 			addAnimation("run", [0, 1, 2, 3, 4, 5], 5); 
 			addAnimation("jump", [7]);
 			addAnimation("fall", [0]);
-			addAnimation("swing", [8, 9, 10, 10, 0], 5);
+			addAnimation("swing", [8, 9, 10, 10, 0], 5, false);
 			addAnimation("stun", [0]);
 			addAnimationCallback(AnimationHandler);
 			
@@ -68,7 +69,7 @@
 			maxVelocity.x = PLAYER_RUN_SPEED;
 			maxVelocity.y = JUMP_ACCELERATION;
 			acceleration.y = GRAVITY_ACCELERATION;
-			ground_buffer = 0;
+			ground_buffer = 11;
 
 			ROLL_ACCELERATION = 0;
 			FRICTION = 0;
@@ -84,21 +85,18 @@
 				state = STATE_JUMP;
 				onFloor = false;
 			}
-			else if (onFloor && (state != STATE_GROUND) && (state != STATE_SWING))
+			
+			else if (onFloor && (state == STATE_FALL || state == STATE_JUMP))
 			{
 				//Land!
 				//FlxG.play(SndLand, 0.8);
 				state = STATE_GROUND;
 			}
-			else if (state == STATE_GROUND && !onFloor)
-			{
-				//Fall!
-				state = STATE_FALL;
-			}
-			
+						
 			//Handle movement for jumping state
 			if (state == STATE_JUMP)
 			{
+				play("jump");
 				acceleration.x = 0;
 				if (FlxG.keys.pressed(BUTTON_LEFT)) { 
 					force_acceleration = -drag.x * AIR_MOVEMENT_MULTIPLIER; 
@@ -167,13 +165,14 @@
 				}
 			}
 			
-			/*
+			//Super-Verbose Debug
+			
 			if (state == STATE_SWING) FlxG.log("Swinging");
 			else if (state == STATE_FALL) FlxG.log("Falling");
 			else if (state == STATE_GROUND) FlxG.log("On Ground");
 			else if (state == STATE_JUMP) FlxG.log("Jumping");
 			else if (state == STATE_STUN) FlxG.log("Stunned");
-			*/
+			
 			
 			//Update animation based on state
 			if (state == STATE_JUMP) {
@@ -193,11 +192,13 @@
 			super.update();
 		}
 		
+		public override function Fall():void { if (state != STATE_JUMP && state != STATE_SWING) { state = STATE_FALL; }}
+		
 		// This is called automatically when an animation is over.
 		// It can tell the Player to automatically go back to a standing state after completing the stick swing animation.
 		public function AnimationHandler(_name:String, _fnum:uint, _fint:uint) : void
 		{
-			if (state == STATE_SWING && (_name == "swing") && (_fnum == 3))
+			if (state == STATE_SWING && (_name == "swing") && (_fnum >= 3))
 			{
 				state = STATE_GROUND;
 			}

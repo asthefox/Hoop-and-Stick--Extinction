@@ -17,6 +17,7 @@
       <value>'1/29/2011'</value>
     </define>
     <source-path append="true">
+<<<<<<< HEAD
       <path-element>C:\Documents and Settings\Alex\My Documents\Flash Projects\Hoop-and-Stick--Extinction\src</path-element>
       <path-element>C:\Documents and Settings\Alex\My Documents\Flash Projects\Hoop-and-Stick--Extinction\flixel</path-element>
       <path-element>C:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
@@ -24,6 +25,15 @@
   </compiler>
   <file-specs>
     <path-element>C:\Documents and Settings\Alex\My Documents\Flash Projects\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
+=======
+      <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\src</path-element>
+      <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\flixel</path-element>
+      <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
+    </source-path>
+  </compiler>
+  <file-specs>
+    <path-element>C:\Users\Teddy\Documents\HoopStick\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
+>>>>>>> 819d1642f08b8d703084375b4e56ed5c989cbd60
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
