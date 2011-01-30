@@ -49,6 +49,8 @@
 			
 			ROLL_ACCELERATION = 300;
 			FRICTION = 20;
+			
+			ground_buffer = 0;
 		}
 		
 		public override function update():void
