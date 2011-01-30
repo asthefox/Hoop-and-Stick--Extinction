@@ -170,25 +170,6 @@
 			}
 		}
 		
-		protected function CheckSpikesCollision() : void
-		{
-			//Check for poison collision
-			for (var i : int = 0; i < level1.spikes.members.length; i++)
-			{
-				if (hoop.overlaps(level1.spikes.members[i]) == true) {
-					if (hoop.velocity.x > 0) {
-						hoop.velocity.x -= 100;
-						hoop.flicker(1.5); 
-					}
-					else {
-						//player.velocity.x += 40;
-						hoop.velocity.x += 100;
-						hoop.flicker(1.5); 
-					}
-				}
-			}
-		}
-		
 		protected function CheckGroundCollision() : void
 		{
 			var playerOnPlatform : Boolean = false;

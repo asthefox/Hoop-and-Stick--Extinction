@@ -194,12 +194,12 @@
 			} else if (state == STATE_STUN) {
 				play("stun");
 			} else if (state == STATE_SWING) {
-				if (PlayState.playerhoopoverlap == true) {
+				//if (PlayState.playerhoopoverlap == true) {
 					play("swing");
-				}
-				else if(PlayState.playerhoopoverlap == false){
-					play("swingF");
-				}
+				//}
+				//else if(PlayState.playerhoopoverlap == false){
+					//play("swingF");
+				//}
 			}
 			
 			super.update();
@@ -213,7 +213,7 @@
 		// It can tell the Player to automatically go back to a standing state after completing the stick swing animation.
 		public function AnimationHandler(_name:String, _fnum:uint, _fint:uint) : void
 		{
-			if (state == STATE_SWING && (_name == "swing") && (_fnum >= 3))
+			if (state == STATE_SWING && (_name == "swing") && (_fnum >= 6))
 			{
 				state = STATE_GROUND;
 			}
