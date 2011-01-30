@@ -17,9 +17,11 @@
 		
 		public function HoopAndStick() 
 		{
-			super(640, 480, PlayState, 1);
+			//super(640, 480, PlayState, 1);
+			super(640, 480, TitleState, 1);
+			//super(640, 480, PlayState, 1);
 			//super(640, 480, TitleState, 1); // TODO: THIS IS THE REAL VERSION TO USE ONCE WE HAVE TITLE AND INTRO CUTSCENE
-			StatePointer = 2; //TODO: DELETE THIS LATER. Just need it for skipping the first states
+			//StatePointer = 2; //TODO: DELETE THIS LATER. Just need it for skipping the first states
 			
 			StateTypes = new Array();
 			StateTypes[TITLE] = TitleState;
@@ -40,5 +42,4 @@
 			FlxG.state = new StateTypes[StatePointer]();
 		}
 	}
-
 }

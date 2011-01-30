@@ -31,7 +31,7 @@
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.75;
 		protected static const FALL_THRESHHOLD:int = 1;
 		
-		public static const HORIZONTAL_HIT_FORCE:Number = 100;
+		public static const HORIZONTAL_HIT_FORCE:Number = 150;
 		public static const VERTICAL_HIT_FORCE:Number = 250;
 		public static const VERTICAL_HIT_DAMPEN:Number = 0.5;
 		
@@ -57,6 +57,7 @@
 			LOCATION = new FlxPoint(_X, _Y);
 			
 			//Setting animations
+			
 			addAnimation("idle", [6]);
 			addAnimation("run", [0, 1, 2, 3, 4, 5], 5); 
 			addAnimation("jump", [7]);

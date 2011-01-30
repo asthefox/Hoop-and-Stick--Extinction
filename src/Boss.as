@@ -16,6 +16,7 @@
 		
 		public var bossHealth : int = 3;
 		public var moveSpeed : Number = 3;
+		public var moveSpeedCharge : Number = 6;
 		public var destination : FlxPoint; //used when he chooses to fly somewhere. null otherwise
 		public var destSet : Boolean = false;
 		public var waitTimer : int = WAIT_TIME;
@@ -201,17 +202,32 @@
 					destination.x = -1000;
 					state = STATE_WINDUP;
 				}
+				else if (state == STATE_CHARGE)
+				{
+					destination.x = -1000;
+					state = STATE_PREFLYING;
+				}
 			}
 			else 
 			{
-				mainBody.x += moveSpeed * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
-				weakPoint.x += moveSpeed * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
-				
-				if (!(YtoGo < moveSpeed && YtoGo > -moveSpeed))
+				if (state == STATE_CHARGE)
 				{
-				mainBody.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
-				weakPoint.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
+					mainBody.x += moveSpeedCharge * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
+					weakPoint.x += moveSpeedCharge * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
 				}
+				else
+				{
+					mainBody.x += moveSpeed * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
+					weakPoint.x += moveSpeed * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
+					
+					if (!(YtoGo < moveSpeed && YtoGo > -moveSpeed))
+					{
+					mainBody.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
+					weakPoint.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
+					}
+				}
+				
+				
 			}
 		}
 		
