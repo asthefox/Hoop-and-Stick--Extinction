@@ -21,7 +21,7 @@
 			player = new Player(100, 960);
 			hoop = new Hoop(100, 960);
 			
-			//Set World bounds. NOTE: this is done in UpdateCamera now
+			//World bounds are set in UpdateCamera now
 			//TODO: Change this once we finalize the level design
 			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
@@ -41,6 +41,8 @@
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
 			UpdateCamera();
+			
+			CheckInput();
 			
 			super.update();
 		}
@@ -161,7 +163,15 @@
 			
 			FlxG.follow(player, 100);
 			//FlxG.followAdjust(0.5, 0); 
-			//FlxG.followBounds(0, 0, 6400, 960, true); //also sets world bounds
+			FlxG.followBounds(0, 0, 6400, 1440, true); //also sets world bounds
+		}
+		
+		public function CheckInput() : void
+		{
+			if (FlxG.keys.justPressed("ENTER"))
+			{
+				HoopAndStick.GetNextState();
+			}
 		}
 	}
 }
