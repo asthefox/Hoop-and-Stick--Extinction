@@ -24,6 +24,7 @@
 		
 		protected var slope_acceleration : Number = 0;
 		protected var force_acceleration : Number = 0;
+		protected var ground_buffer : int = 5;
 		
 		public function MobileSprite(X:Number=0,Y:Number=0, SimpleGraphic:Class=null)
 		{
@@ -75,7 +76,7 @@
 				
 				if(ROLL_ACCELERATION != 0) DetermineSlope(ObjectPP);
 				
-				if(FlxHitTest.complexHitTestPoint(ObjectPP, this.x+width/2, this.y+height))
+				if(FlxHitTest.complexHitTestPoint(ObjectPP, this.x+width/2, this.y+height-Math.floor(ground_buffer/2)))
 				{
 					onFloor = true;
 					hitBottom(ObjectPP, 0);
@@ -85,9 +86,9 @@
 					
 					//There's some jittery wonkiness with slopes - this smooths it out by adding a 2-pixel buffer zone					
 					var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
-					if (hitArea.y > 5)
+					if (hitArea.y > ground_buffer)
 					{
-						y -= hitArea.height - 3;
+						y -= hitArea.height - Math.ceil(ground_buffer/2);
 					}
 					return true;
 				}

@@ -27,7 +27,7 @@
 		
 		//Tweakable movement/physics variables
 		protected static const PLAYER_RUN_SPEED:int = 100;
-		protected static const JUMP_ACCELERATION:Number = 330;
+		protected static const JUMP_ACCELERATION:Number = 500;
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.5;
 		//protected var PLAYER_START_X:int = 100;
 		//protected var PLAYER_START_Y:int = 100;
@@ -68,6 +68,7 @@
 			maxVelocity.x = PLAYER_RUN_SPEED;
 			maxVelocity.y = JUMP_ACCELERATION;
 			acceleration.y = GRAVITY_ACCELERATION;
+			ground_buffer = 11;
 
 			ROLL_ACCELERATION = 0;
 			FRICTION = 0;
@@ -166,8 +167,13 @@
 				}
 			}
 			
+			/*
 			if (state == STATE_SWING) FlxG.log("Swinging");
-			
+			else if (state == STATE_FALL) FlxG.log("Falling");
+			else if (state == STATE_GROUND) FlxG.log("On Ground");
+			else if (state == STATE_JUMP) FlxG.log("Jumping");
+			else if (state == STATE_STUN) FlxG.log("Stunned");
+			*/
 			
 			//Update animation based on state
 			if (state == STATE_JUMP) {
