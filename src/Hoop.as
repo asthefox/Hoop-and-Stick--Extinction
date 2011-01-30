@@ -14,7 +14,7 @@
 		protected static const SPIN_DRAG:Number = 500; //240;
 		
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 2;//1.75;//0.85;
-		protected static const TIP_THRESHHOLD:Number = 7;
+		protected static const TIP_THRESHHOLD:Number = 10;
 		//protected var HOOP_START_X:int = 100;
 		//protected var HOOP_START_Y:int = 100;
 		
@@ -48,7 +48,7 @@
 			
 			ROLL_ACCELERATION = 300;
 			FRICTION = 20;
-			GRAVITY_ACCELERATION = 400;
+			GRAVITY_ACCELERATION = 300;
 			
 			ground_buffer = 9;
 		}

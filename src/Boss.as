@@ -177,8 +177,7 @@
 					waitTimer = WAIT_TIME;
 					destSet = false;
 				}
-			}
-			
+			}	
 		}
 		
 		public function SetDestination() : void
