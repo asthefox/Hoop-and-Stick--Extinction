@@ -79,7 +79,6 @@
 				}
 				if (FlxU.solveXCollision(hoop,level1.bowlingball))
 				{
-					var pText : PositiveText = new PositiveText(player.x, level1.bowlingball.y - 40, "GAME STARTED: BOWLING!\nONE OF THREE GAMES REVIVED", 0xffffff);
 					level1.bowlingball.hit = true;
 				}
 				
@@ -102,6 +101,7 @@
 			{
 				if (level1.bowlingball.exists)
 				{
+					var pText : PositiveText = new PositiveText(player.x, level1.bowlingPins.y, "GAME STARTED: BOWLING!\nONE OF THREE GAMES REVIVED", 0xffffff);
 					level1.bowlingball.kill();
 				}
 			}
