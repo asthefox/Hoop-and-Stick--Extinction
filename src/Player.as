@@ -30,12 +30,13 @@
 		protected static const JUMP_ACCELERATION:Number = 350;
 		protected static const AIR_MOVEMENT_MULTIPLIER:Number = 0.75;
 		protected static const FALL_THRESHHOLD:int = 1;
-		//protected var PLAYER_START_X:int = 100;
-		//protected var PLAYER_START_Y:int = 100;
 		
 		public static const HORIZONTAL_HIT_FORCE:Number = 100;
 		public static const VERTICAL_HIT_FORCE:Number = 250;
 		public static const VERTICAL_HIT_DAMPEN:Number = 0.5;
+		
+		//Var for other objects to use to reference position
+		public static var LOCATION : FlxPoint;
 		
 		//State Machine!
 		public static const STATE_GROUND:int = 0;
@@ -53,6 +54,7 @@
 		{
 			super(_X, _Y);
 			loadGraphic(PlayerImage, true, true, 50, 100);
+			LOCATION = new FlxPoint(_X, _Y);
 			
 			//Setting animations
 			addAnimation("idle", [6]);
@@ -194,6 +196,8 @@
 			}
 			
 			super.update();
+			LOCATION.x = x;
+			LOCATION.y = y;
 		}
 		
 		public override function Fall():void { if (state != STATE_JUMP && state != STATE_SWING) { state = STATE_FALL; }}

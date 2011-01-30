@@ -89,7 +89,7 @@
 			AddElements();
 			
 			//TEMPORARY BOSS INSERTION
-			var boss : Boss = new Boss(100, 1000);
+			var boss : Boss = new Boss(6000);
 			FlxG.state.add(boss);
 		}
 		

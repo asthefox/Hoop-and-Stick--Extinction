@@ -18,8 +18,8 @@
 		{	
 			level1 = new Level();
 			
-			player = new Player(100, 960);
-			hoop = new Hoop(100, 960);
+			player = new Player(6000, 960);//(100, 960);
+			hoop = new Hoop(6000, 960); //(100, 960);
 			
 			//World bounds are set in UpdateCamera now
 			//TODO: Change this once we finalize the level design
@@ -34,12 +34,12 @@
 		public override function update():void
 		{	
 			
-			CheckBowlingCollision();
+			//CheckBowlingCollision();
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
-			UpdateShootingSituation();
+			//UpdateShootingSituation();
 			UpdateCamera();
 			
 			CheckInput();
