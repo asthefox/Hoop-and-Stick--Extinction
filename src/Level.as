@@ -68,19 +68,6 @@
 			AddElements();
 		}
 		
-		public function AddElements() : void
-		{
-			FlxG.state.add(sky);
-			FlxG.state.add(grounds);
-			FlxG.state.add(boxstacles);
-			FlxG.state.add(boxstacleTops);
-			FlxG.state.add(spikes);
-			FlxG.state.add(grounds);
-			FlxG.state.add(poisons);
-			
-			//FlxG.state.add(wrapper);
-		}
-		
 		public function update() : void
 		{
 			poisons1.play("PlayAnimation");
@@ -144,26 +131,14 @@
 		public function AddElements() : void
 		{
 			FlxG.state.add(sky);
-			
 			FlxG.state.add(grounds);
-			
 			FlxG.state.add(boxstacles);
-			
 			FlxG.state.add(boxstacleTops);
-			
 			FlxG.state.add(spikes);
-			
 			FlxG.state.add(grounds);
 			FlxG.state.add(poisons);
 			FlxG.state.add(bowlingball);
-			
-			FlxG.state.add(wrapper);
-		}
-		
-		public function update() : void
-		{
-			//FlxG.log("" + grounds.members[0].facing);
-			poisons1.play("PlayAnimation");
+			//FlxG.state.add(wrapper);
 		}
 		
 	}

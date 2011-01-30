@@ -4,7 +4,6 @@
 <flex-config>
   <target-player>10.0.0</target-player>
   <compiler>
-<<<<<<< HEAD
     <define append="true">
       <name>CONFIG::debug</name>
       <value>true</value>
@@ -25,16 +24,6 @@
   </compiler>
   <file-specs>
     <path-element>C:\msysgit\msysgit\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
-=======
-    <source-path append="true">
-      <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\src</path-element>
-      <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\flixel</path-element>
-      <path-element>D:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
-    </source-path>
-  </compiler>
-  <file-specs>
-    <path-element>D:\Documents and Settings\Mike\My Documents\HoopAndStick\Hoop-and-Stick--Extinction\src\HoopAndStick.as</path-element>
->>>>>>> ddd8674981b916191ed31ea11c76af6f1f382dc1
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
