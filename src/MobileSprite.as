@@ -100,10 +100,10 @@
 						//var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
 						var hitArea : Rectangle = FlxHitTest.complexHitTestSlice(ObjectPP, x+width/2, y+height);
 						
-						if (Math.abs(x - last_x) > ROLL_BUFFER && hitArea.y > ground_buffer)
-						{
+						//if (Math.abs(x - last_x) > ROLL_BUFFER && hitArea.y > ground_buffer)
+						//{
 							y -= (hitArea.height - ground_buffer);
-						}
+						//}
 						
 						return true;
 					}

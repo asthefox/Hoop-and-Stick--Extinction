@@ -66,7 +66,7 @@
 			sky.scrollFactor.x = 0;
 			sky.solid = false;
 			
-			bowlingball = new Bowlingball(400, 1250);
+			bowlingball = new Bowlingball(400, 1200);
 			bowlingPins = new BowlingPins(600, 1200);
 			
 			spikes = new FlxGroup();
@@ -299,8 +299,8 @@
 					boxTop01  = new BoxstacleTop(5180, 1200);
 				}
 
-				boxstacles.add(box01);
-				boxstacleTops.add(boxTop01);
+				//boxstacles.add(box01);
+				//boxstacleTops.add(boxTop01);
 			}
 			
 			

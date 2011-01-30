@@ -27,12 +27,15 @@
 			FRICTION = 20;
 			
 			ground_buffer = 1;
+			
+			fixed = true;
 		}
 		
 		public override function update():void
 		{
 			if (hit)
 			{
+				velocity.x = 130;
 				play("roll");
 			}
 			else
