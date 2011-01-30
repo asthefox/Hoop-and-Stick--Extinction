@@ -14,6 +14,8 @@
 		protected const CAMERA_LEAD_X : int = 30;
 		protected const CAMERA_LEAD_Y : int = 30;
 		
+		public var speedTrap : Boolean = false;
+		
 		override public function create():void
 		{	
 			level1 = new Level();
@@ -69,6 +71,19 @@
 				{
 					level1.bowlingball.hit = true;
 				}
+				
+				//Check for ground collision - bowling ball
+				for (var i = 0; i < level1.grounds.members.length; i++)
+				{
+					if (level1.bowlingball.collide(level1.boxstacleTops.members[15]))
+					{
+						break;
+					}
+					else if (level1.bowlingball.collide(level1.grounds.members[i]))
+					{
+						break;
+					}
+				}
 			}
 			else
 			{
@@ -109,9 +124,19 @@
 			for (var i : int = 0; i < level1.poisons.members.length; i++)
 			{
 				level1.poisons.members[i].play("PoisonAnimation");
-				if (player.overlaps(level1.poisons.members[i]) == true) {
-					//slow down player
-					player.velocity.x = -1000;
+				
+				if (player.overlaps(level1.poisons.members[i]) == true)
+				//slow down player
+				{
+					if (!speedTrap)
+					{
+						player.velocity.x *= 0.5;
+						speedTrap = true;
+					}
+				}
+				else
+				{
+					speedTrap = false;
 				}
 			}
 		}
@@ -159,18 +184,6 @@
 				{
 					hoopOnPlatform = true;
 					break;
-				}
-			}
-			
-			//Check for ground collision - bowling ball
-			if (level1.bowlingball != null && level1.bowlingball.exists)
-			{
-				for (i = 0; i < level1.grounds.members.length; i++)
-				{
-					if (level1.bowlingball.collide(level1.grounds.members[i]))
-					{
-						break;
-					}
 				}
 			}
 			
