@@ -20,8 +20,8 @@
 		{	
 			level1 = new Level();
 			
-			player = new Player(6000, 960);//(100, 960);
-			hoop = new Hoop(6000, 960); //(100, 960);
+			player = new Player(100, 1200);//(6000, 960);
+			hoop = new Hoop(100, 1200); // (6000, 960);
 			
 			//World bounds are set in UpdateCamera now
 			//TODO: Change this once we finalize the level design
@@ -36,12 +36,12 @@
 		public override function update():void
 		{	
 			
-			//CheckBowlingCollision();
+			CheckBowlingCollision();
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
-			//UpdateShootingSituation();
+			UpdateShootingSituation();
 			UpdateCamera();
 			
 			CheckInput();
@@ -76,7 +76,7 @@
 				}
 				
 				//Check for ground collision - bowling ball
-				for (var i = 0; i < level1.grounds.members.length; i++)
+				for (var i : int = 0; i < level1.grounds.members.length; i++)
 				{
 					/*
 					if (level1.bowlingball.collide(level1.boxstacleTops.members[15]))

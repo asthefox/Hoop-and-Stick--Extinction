@@ -8,7 +8,7 @@
 		public const BOSS_AREA_X : int = 650; //length of X range the boss will move around in //(6400-200) - 5550
 		public const WAIT_TIME : int = 20;
 		public const WINDUP_TIME : int = 80;
-		public const ALTITUDE : int = 920; //default flight altitude
+		public const ALTITUDE : int = 940; //default flight altitude
 		public const ALTITUDE_GROUND : int = 1120;
 		
 		public var mainBody : FlxSprite;
@@ -34,13 +34,14 @@
 		public static const STATE_CHARGE:int = 8; // attack!
 		public static const STATE_PRELANDING:int = 9; // land in prep for charging
 		public static const STATE_PRECHARGE:int = 10; // attack!
+		public static const STATE_PREFLYING:int = 11;
+		public static const STATE_IDLE:int = 12;
 		//public static const STATE_PRETAKE:int = 5;
 		//public static const STATE_TAKE:int = 6;
 		//public static const STATE_PRETRAP:int = 7;
 		//public static const STATE_TRAP:int = 8;
 		
-		public static const STATE_PREFLYING:int = 10;
-		public static const STATE_IDLE:int = 11;
+		
 		
 		public var state : int = STATE_CHOOSING;		
 		
@@ -84,6 +85,7 @@
 			
 			weakPoint = new FlxSprite(100,60);
 			weakPoint.createGraphic(100, 20, 0xffff0088);
+			weakPoint.visible = false;
 			add(weakPoint);
 		}
 		
@@ -94,9 +96,11 @@
 			switch (state)
 			{
 				case STATE_CHOOSING:
+					mainBody.play("fly");	
 					Choose();
 					break;
 				case STATE_PREFLYING:
+					mainBody.play("fly");
 					PreFly();
 					break;
 				case STATE_FLYING:
@@ -104,6 +108,7 @@
 					break;
 				case STATE_PRELANDING:
 					SetDestination();
+					destSet = false;
 					state = STATE_LANDING;
 					break;
 				case STATE_LANDING:
@@ -114,6 +119,7 @@
 					break;
 				case STATE_PRECHARGE:
 					SetDestination();
+					destSet = false;
 					state = STATE_CHARGE;
 					break;
 				case STATE_CHARGE:
@@ -121,10 +127,16 @@
 					break;
 			}
 			
+			//FlxG.log("state is: " + state);
+			
 			if (state == STATE_FLYING || state == STATE_PREFLYING)
 			{
 				HandleFacing();
 			}
+			
+			if (mainBody.facing == FlxSprite.LEFT) weakPoint.x = mainBody.x;
+			else weakPoint.x = mainBody.x + 100;
+			weakPoint.y = mainBody.y + 60;
 			
 			//mainBody.x += 2;
 			//weakPoint.x += 2;
@@ -147,7 +159,7 @@
 			//else if (decision < 70) state = STATE_LAUGHING; //20% chance he'll pause to gloat
 			//else if (decision < 80) state = STATE_PREHOOPS; //10% chance he'll prepare to drop hoops
 			//else if (decision < 90) state = STATE_PRETAKE; //10% chance he'll prepare to take your hoop
-			else state = STATE_FLYING;
+			else state = STATE_PREFLYING;
 		}
 		
 		public function PreFly() : void
@@ -173,7 +185,7 @@
 		{
 			var theX : int = 5550 + Math.random() * BOSS_AREA_X;
 			destination.x = theX;
-			if (state == STATE_PRELANDING || STATE_CHARGE)
+			if (state == STATE_PRELANDING || state == STATE_CHARGE)
 			{
 				destination.y = ALTITUDE_GROUND;
 			}
@@ -190,7 +202,7 @@
 			var toGo : int = destination.x - mainBody.x;
 			var YtoGo : int = destination.y - mainBody.y;
 			
-			if ((toGo < moveSpeed) && (toGo > -moveSpeed))
+			if ((toGo < moveSpeedCharge) && (toGo > -moveSpeedCharge))
 			{
 				if (state == STATE_FLYING)
 				{
@@ -214,6 +226,8 @@
 				{
 					mainBody.x += moveSpeedCharge * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
 					weakPoint.x += moveSpeedCharge * ((destination.x - mainBody.x) / Math.abs(destination.x - mainBody.x));
+					if (destination.x - mainBody.x > 0) mainBody.facing = FlxSprite.RIGHT;
+					else mainBody.facing = FlxSprite.LEFT;
 				}
 				else
 				{
@@ -222,8 +236,8 @@
 					
 					if (!(YtoGo < moveSpeed && YtoGo > -moveSpeed))
 					{
-					mainBody.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
-					weakPoint.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
+						mainBody.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
+						weakPoint.y += moveSpeed * ((destination.y - mainBody.y) / Math.abs(destination.y - mainBody.y));
 					}
 				}
 				
@@ -238,6 +252,7 @@
 			windupTimer--;
 			if (windupTimer < 1)
 			{
+				FlxG.log("now precharge");
 				state = STATE_PRECHARGE;
 				windupTimer = WINDUP_TIME;
 			}
@@ -248,12 +263,10 @@
 			if (mainBody.x + mainBody.width / 2 > Player.LOCATION.x + 25)
 			{
 				mainBody.facing = FlxSprite.LEFT;
-				weakPoint.x = mainBody.x;
 			}
 			else
 			{
 				mainBody.facing = FlxSprite.RIGHT;
-				weakPoint.x = mainBody.x + 100;
 			}
 			
 		}
