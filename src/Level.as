@@ -28,6 +28,8 @@
 		public var poisons: FlxGroup;
 		public var spikes: FlxGroup;
 		
+		private var poisons1: FlxSprite;
+		
 		public function Level() 
 		{
 			sky = new FlxSprite(0, 0);
@@ -36,25 +38,36 @@
 			sky.solid = false;
 			
 			spikes = new FlxGroup();
-			var spikes1: FlxSprite = new FlxSprite(0 + 640 *0 + 300, 1198, Spikes);
-			spikes.add(spikes1);
+			//var spikes1: FlxSprite = new FlxSprite(250, 1250, Spikes);
+			//spikes.add(spikes1);
+			var spikes2: FlxSprite = new FlxSprite(640 * 4 + 350, 1310, Spikes);
+			spikes.add(spikes2);
 			
 			poisons = new FlxGroup();
+			//loadGraphic(Poison, true, true, 50, 100);
 			
-			var poisons1: FlxSprite = new FlxSprite(0 + 640 * 0 + 848, 1198, Poison);
-			poisons.add(spikes1);
-			var poisons2: FlxSprite= new FlxSprite(0 + 640 * 1 + 50, 1198,Poison);
-			poisons.add(poisons2);
-			var poisons3: FlxSprite= new FlxSprite(0 + 640 * 2 + 50, 1198,Poison);
-			poisons.add(poisons3);
-			var poisons4: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
-			poisons.add(poisons4);
-			var poisons5: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
-			poisons.add(poisons5);
-			var poisons6: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
-			poisons.add(poisons6);
-			var poisons7: FlxSprite = new FlxSprite(0 + 640 * 0 + 50, 1198, Poison);
-			poisons.add(poisons7);
+			//addAnimation("idle", [1,2,3]);
+			for (var i : int = 0; i < 5; i++)
+			{
+				if(i == 0){
+					poisons1 = new FlxSprite(640 * 1 + 205, 1250);
+				}
+				else if (i == 1) {
+					poisons1 = new FlxSprite(640 * 2 + 500, 1310);
+				}
+				else if (i == 2) {
+					poisons1 = new FlxSprite(640 * 2 + 600, 1310);
+				}
+				else if (i == 3) {
+					poisons1 = new FlxSprite(640 * 3 + 30, 1310);
+				}
+				else if (i == 4) {
+					poisons1 = new FlxSprite(640 * 3 + 150, 1310);
+				}
+				poisons1.loadGraphic(Poison, true, false, 50, 110);
+				poisons1.addAnimation("PoisonAnimation", [0,1,2],3);
+				poisons.add(poisons1);
+			}
 			
 			
 			grounds = new FlxGroup();
@@ -88,8 +101,9 @@
 		{
 			FlxG.state.add(sky);
 			FlxG.state.add(spikes);
-			FlxG.state.add(poisons);
+			
 			FlxG.state.add(grounds);
+			FlxG.state.add(poisons);
 			
 
 		}
@@ -97,6 +111,7 @@
 		public function update() : void
 		{
 			//FlxG.log("" + grounds.members[0].facing);
+			poisons1.play("PlayAnimation");
 		}
 		
 		

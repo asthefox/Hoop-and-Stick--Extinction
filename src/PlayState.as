@@ -49,13 +49,17 @@
 			//Check for poison collision with Player
 			for (var i : int = 0; i < level1.poisons.members.length; i++)
 			{
+				level1.poisons.members[i].play("PoisonAnimation");
 				if (player.overlaps(level1.poisons.members[i]) == true) {
 					//slow down player
 					if (player.velocity.x > 0) {
-						player.velocity.x = 20;
+						player.velocity.x -= 600;
+						player.flicker(1.5); 
 					}
 					else {
-						player.velocity.x = -20;
+						//player.velocity.x += 40;
+						player.velocity.x += 600;
+						player.flicker(1.5); 
 					}
 				}
 			}
@@ -67,8 +71,15 @@
 			for (var i : int = 0; i < level1.spikes.members.length; i++)
 			{
 				if (hoop.overlaps(level1.spikes.members[i]) == true) {
-					//hoop falls over
-					hoop.velocity.x = 0;
+					if (hoop.velocity.x > 0) {
+						hoop.velocity.x -= 100;
+						hoop.flicker(1.5); 
+					}
+					else {
+						//player.velocity.x += 40;
+						hoop.velocity.x += 100;
+						hoop.flicker(1.5); 
+					}
 				}
 			}
 		}
@@ -89,7 +100,7 @@
 		protected function CheckStickHit() : void {
 			//Check for hoop and stick collision
 			//Is player swinging?
-			if (player.state == Player.STATE_SWING)
+			if (player.state == Player.STATE_SWING && hoop.state != Hoop.STATE_LOSE)
 			{
 				//Has player hit hoop for the first time this swing?
 				if (player.stickDir != Player.NONE && FlxHitTest.complexHitTestObject(player, hoop))

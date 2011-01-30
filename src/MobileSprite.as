@@ -42,8 +42,8 @@
 			
 			acceleration.x = force_acceleration;
 			if (onFloor) {
-				acceleration.y = 0;
 				velocity.y = 0;
+				acceleration.y = 0;
 				
 				acceleration.x += slope_acceleration;
 				
@@ -83,18 +83,29 @@
 				{
 					if(ROLL_ACCELERATION != 0) DetermineSlope(ObjectPP);
 					
-					if(FlxHitTest.complexHitTestPoint(ObjectPP, this.x+width/2, this.y+height-ground_buffer+1))
+					if (this is Player && (this as Player).state == Player.STATE_JUMP && velocity.y < 0) return false; 
+					
+					if(FlxHitTest.complexHitTestPoint(ObjectPP, this.x+width/2, this.y+height-ground_buffer))
 					{
 						onFloor = true;
 						hitBottom(ObjectPP, 0);
 						ObjectPP.hitTop(this, 0);
 						
-						var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
+						//var hitArea : Rectangle = FlxHitTest.complexHitTestRectangle(this, ObjectPP);
+						var hitArea : Rectangle = FlxHitTest.complexHitTestSlice(ObjectPP, x+width/2, y+height);
+						
 						if (Math.abs(x - last_x) > ROLL_BUFFER && hitArea.y > ground_buffer)
 						{
-							y -= hitArea.height - ground_buffer;
+							y -= (hitArea.height - ground_buffer);
 						}
+						
 						return true;
+					}
+					
+					if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
+					{
+						//FlxG.log("Fall!");
+						Fall();
 					}
 				}
 				return false;
@@ -141,6 +152,8 @@
 				slope_acceleration = 0;
 			}
 		}
+		
+		public function Fall():void{}
 	}
 	
 
