@@ -36,6 +36,7 @@
 		public override function update():void
 		{	
 			CheckGroundCollision();
+			CheckBoxCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
@@ -92,9 +93,21 @@
 				player.collide(level1.grounds.members[i]);
 				hoop.collide(level1.grounds.members[i]);
 			}
-			
-			
+		}
+		
+		protected function CheckBoxCollision():void
+		{
+			for (var i : int = 0; i < level1.boxstacles.members.length; i++)
+			{
+				player.collide(level1.boxstacleTops.members[i]);
+				hoop.collide(level1.boxstacleTops.members[i]);
 
+				FlxU.solveXCollision(hoop,level1.boxstacles.members[i]);
+				FlxU.solveYCollision(hoop, level1.boxstacles.members[i]);
+				
+				FlxU.solveXCollision(player,level1.boxstacles.members[i]);
+				FlxU.solveYCollision(player,level1.boxstacles.members[i]);
+			}
 		}
 		
 		protected function CheckStickHit() : void {
