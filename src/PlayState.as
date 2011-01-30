@@ -36,7 +36,6 @@
 		public override function update():void
 		{	
 			CheckGroundCollision();
-			CheckBoxCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
 			CheckSpikesCollision();
@@ -89,19 +88,18 @@
 		
 		protected function CheckGroundCollision() : void
 		{
+			var playerOnPlatform : Boolean = false;
+			
 			//Check for ground collision
 			for (var i : int = 0; i < level1.grounds.members.length; i++)
 			{
-				player.collide(level1.grounds.members[i]);
+				if(player.collide(level1.grounds.members[i])) playerOnPlatform = true;
 				hoop.collide(level1.grounds.members[i]);
 			}
-		}
-		
-		protected function CheckBoxCollision():void
-		{
-			for (var i : int = 0; i < level1.boxstacles.members.length; i++)
+			
+			for (i = 0; i < level1.boxstacles.members.length; i++)
 			{
-				player.collide(level1.boxstacleTops.members[i]);
+				if(player.collide(level1.boxstacleTops.members[i])) playerOnPlatform = true;
 				hoop.collide(level1.boxstacleTops.members[i]);
 
 				FlxU.solveXCollision(hoop,level1.boxstacles.members[i]);
@@ -109,6 +107,15 @@
 				
 				FlxU.solveXCollision(player,level1.boxstacles.members[i]);
 				FlxU.solveYCollision(player,level1.boxstacles.members[i]);
+			}
+			
+			if (!playerOnPlatform)
+			{
+			//	if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
+			//{
+				//FlxG.log("Fall!");
+				player.Fall();
+			//}
 			}
 		}
 		

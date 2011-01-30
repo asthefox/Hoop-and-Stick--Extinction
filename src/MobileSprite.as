@@ -56,6 +56,12 @@
 			
 			last_x = x;
 			
+			//if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
+			//{
+			//	//FlxG.log("Fall!");
+			//	Fall();
+			//}
+			
 			super.update();
 		}
 		
@@ -100,12 +106,6 @@
 						}
 						
 						return true;
-					}
-					
-					if (!FlxHitTest.complexHitTestPoint(ObjectPP, this.x + width / 2, this.y + height - ground_buffer + 10))
-					{
-						//FlxG.log("Fall!");
-						Fall();
 					}
 				}
 				return false;
