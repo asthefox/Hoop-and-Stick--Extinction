@@ -14,6 +14,9 @@
 		public static var playerhoopoverlap: Boolean; 
 		public var reachedBoss : Boolean = false;
 		
+		public var wallL : WorldWall;
+		public var wallR : WorldWall;
+		
 		protected var cameraPoint : FlxObject = null;
 		protected const CAMERA_LEAD_X : int = 30;
 		protected const CAMERA_LEAD_Y : int = 30;
@@ -25,6 +28,11 @@
 		
 		override public function create():void
 		{	
+			wallL = new WorldWall(0, 0);
+			add(wallL);
+			wallR = new WorldWall(6390, 0);
+			add(wallR);
+			
 			level1 = new Level();
 			
 			player = new Player(100, 1200);
@@ -70,7 +78,10 @@
 			
 			CheckForEndState();
 			
-			
+			wallL.collide(player);
+			wallL.collide(hoop);
+			wallR.collide(player);
+			wallR.collide(hoop);
 			
 			super.update();
 		}

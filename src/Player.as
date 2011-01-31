@@ -63,7 +63,7 @@
 			addAnimation("jump", [7]);
 			addAnimation("fall", [0]);
 			addAnimation("swing", [8, 9, 10, 11, 12, 12, 0], 5, false);
-			addAnimation("swingF", [13, 14, 15, 0], 7, false);
+			addAnimation("swingF", [13, 14, 15, 0], 9, false);
 			addAnimation("stun", [0]);
 			addAnimationCallback(AnimationHandler);
 			
