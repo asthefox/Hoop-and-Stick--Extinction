@@ -113,7 +113,7 @@
 		{
 			if (state == STATE_GROUND && (_name == "tip") && (_fnum == 19))
 			{
-				FlxG.log("Fall!");
+				//FlxG.log("Fall!");
 				state = STATE_LOSE;
 			}
 		}

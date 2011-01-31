@@ -84,7 +84,7 @@
 			//Jumping/Falling/Landing state machine
 			if (FlxG.keys.justPressed(BUTTON_JUMP))
 			{
-				FlxG.log("tryin ta jump: " + state);
+				//FlxG.log("tryin ta jump: " + state);
 				if(state == STATE_GROUND) {
 					//Jump!
 					//FlxG.play(SndJump);

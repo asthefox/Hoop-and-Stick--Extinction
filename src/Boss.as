@@ -16,10 +16,11 @@
 		public var weakPoint : FlxSprite;
 		
 		public var hitTimer : int = 0;
+		public var hoopArray : Array;
 		
 		public var bossHealth : int = 3;
 		public var moveSpeed : Number = 3;
-		public var moveSpeedCharge : Number = 6;
+		public var moveSpeedCharge : Number = 8;
 		public var destination : FlxPoint; //used when he chooses to fly somewhere. null otherwise
 		public var destSet : Boolean = false;
 		public var waitTimer : int = WAIT_TIME;
@@ -87,10 +88,12 @@
 			mainBody.solid = false;
 			
 			weakPoint = new FlxSprite(100,60);
-			weakPoint.createGraphic(100, 30, 0xffff0088);
+			weakPoint.createGraphic(100, 20, 0xffff0088);
 			weakPoint.visible = false;
 			weakPoint.solid = true;
 			add(weakPoint);
+			
+			hoopArray = new Array();
 		}
 		
 		public override function update() : void
@@ -129,6 +132,9 @@
 				case STATE_CHARGE:
 					MoveTo();
 					break;
+				case STATE_HOOPS:
+					FakeHoops();
+					break;
 			}
 			
 			//FlxG.log("state is: " + state);
@@ -144,24 +150,38 @@
 			
 			if (hitTimer > 0) hitTimer--;
 			
+			for (var i : int = 0; i < hoopArray.length; i++)
+			{
+				if (hoopArray[i].shouldDie) {
+					hoopArray[i].kill();
+					hoopArray.splice(i, 1);
+					//FlxG.log("killed hoop #" + i + ",  hoop count now " + hoopArray.length);
+				}
+			}
+			
 			//mainBody.x += 2;
 			//weakPoint.x += 2;
 		}
 		
 		public function Choose() : void
 		{
-			FlxG.log("choosing");
 			var decision : Number = Math.random() * 100;
 			
 			if (decision < 50) {
-				state = STATE_PREFLYING;//(decision < 50) state = STATE_PREFLYING; //always. later, 50% chance he'll just prepare to fly to a point
-				FlxG.log("chose to fly");
+				state = STATE_PREFLYING; //always. later, 50% chance he'll just prepare to fly to a point
+				//FlxG.log("chose to fly");
+			}
+			else if (decision < 85 && hoopArray.length < 2 )
+			{
+				state = STATE_HOOPS; // 20% drop fake hoops
+				//FlxG.log("chose to throw hoops");
 			}
 			else if (decision < 101) 
 			{
-				state = STATE_PRELANDING; //(decision < 60) state = STATE_LANDING; // land for attack
-				FlxG.log("chose to attack");
+				state = STATE_PRELANDING; // 30% land for attack
+				//FlxG.log("chose to attack");
 			}
+			
 			//else if (decision < 70) state = STATE_LAUGHING; //20% chance he'll pause to gloat
 			//else if (decision < 80) state = STATE_PREHOOPS; //10% chance he'll prepare to drop hoops
 			//else if (decision < 90) state = STATE_PRETAKE; //10% chance he'll prepare to take your hoop
@@ -199,7 +219,7 @@
 				destination.y = ALTITUDE;
 			}
 			destSet = true;
-			FlxG.log("new boss destination: (" + destination.x + ", " + destination.y + ")");
+			//FlxG.log("new boss destination: (" + destination.x + ", " + destination.y + ")");
 		}
 		
 		public function MoveTo() : void
@@ -257,7 +277,6 @@
 			windupTimer--;
 			if (windupTimer < 1)
 			{
-				FlxG.log("now precharge");
 				state = STATE_PRECHARGE;
 				windupTimer = WINDUP_TIME;
 			}
@@ -285,6 +304,24 @@
 				mainBody.flicker(2);
 				hitTimer = HIT_TIME;
 			}
+		}
+		
+		public function FakeHoops() : void
+		{
+			mainBody.play("hoops");
+			
+			var playerDir : Number = -( (mainBody.x + mainBody.width / 2) - (Player.LOCATION.x + 25) ) 
+									/ Math.abs((mainBody.x + mainBody.width / 2) - (Player.LOCATION.x + 25));
+			
+			for (var i : int = 0; i < 3; i++) {
+				var hoop : FakeHoop = new FakeHoop(mainBody.x + mainBody.width / 2, mainBody.y + mainBody.height * (2/4));
+				hoop.velocity.x = hoop.hoopSpeed * (i+1) * playerDir;
+				hoop.velocity.y = -100;
+				hoopArray.push(hoop);
+				FlxG.state.add(hoop);
+			}
+			
+			state = STATE_CHOOSING;
 		}
 		
 	}

@@ -34,19 +34,15 @@
 			
 			level1 = new Level();
 			
+			//FOR BOSS TESTING
 			//player = new Player(5100, 1000);
 			//hoop = new Hoop(5100, 1000);
-			
 			
 			player = new Player(100, 1200);
 			hoop = new Hoop(100, 1200);
 			
-			//FOR BOSS TESTING
-			//player = new Player(6000, 960);
-			//hoop = new Hoop(6000, 960);
 			
 			//World bounds are set in UpdateCamera now
-			//TODO: Change this once we finalize the level design
 			//FlxU.setWorldBounds(0, 0, 6400, 960);
 			cameraPoint = new FlxObject(player.x, FlxG.height/2, 1, 1);
 			
@@ -72,9 +68,11 @@
 			CheckGroundCollision();
 			CheckStickHit();
 			CheckPoisonsCollision();
-			//CheckSpikesCollision();
 			UpdateShootingSituation();
 			CheckBossCollision();
+			
+			//CheckSpikesCollision();
+			
 			UpdateCamera();
 			
 			CheckInput();
@@ -89,12 +87,12 @@
 			if (!reachedBoss && player.x > 5300)
 			{
 				reachedBoss = true;
+				level1.SpawnBoss();
 				var warningText : PositiveText = new PositiveText(player.x, 1150, "WARNING: \nAnti-Game Enforcement Approaching", 0xffffcccc);
 				warningText.size = 30;
 			}
 			
 			super.update();
-			
 			
 		}
 		
@@ -329,10 +327,13 @@
 				win = false;
 				FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
 			}
-			if (level1.boss.bossHealth < 1 && !gameOver) {
-				gameOver = true;
-				win = true;
-				FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
+			if (reachedBoss) 
+			{
+				if (level1.boss.bossHealth < 1 && !gameOver) {
+					gameOver = true;
+					win = true;
+					FlxG.fade.start(0xff000000, 8, MyFadeComplete, true);
+				}
 			}
 		}
 		public function MyFadeComplete() : void {
@@ -346,11 +347,45 @@
 		
 		public function CheckBossCollision() : void
 		{
-			if (hoop.collide(level1.boss.weakPoint) || FlxG.keys.justPressed("NINE"))
+			if (reachedBoss)
 			{
-				level1.boss.TakeDamage();
+				if (hoop.collide(level1.boss.weakPoint))
+				{
+					level1.boss.TakeDamage();
+				}
+				
+				for (var k : int = 0; k < level1.boss.hoopArray.length; k++)
+				{
+					for  (var i : int = 0; i < level1.grounds.members.length; i++)
+					{
+						level1.boss.hoopArray[k].collide(level1.grounds.members[i]);
+					}
+					
+					
+					
+					//check if player hits FakeHoops
+					//Is player swinging?
+					if (player.state == Player.STATE_SWING)
+					{
+						//Has player hit hoop for the first time this swing?
+						if (player.stickDir != Player.NONE && FlxHitTest.complexHitTestObject(player, level1.boss.hoopArray[k]))
+						{	
+							player.stickDir = Player.NONE;
+							level1.boss.hoopArray[k].KillSoon();
+						}
+					}
+					
+					
+				}
 			}
 			
+			
+			
+			
+			
 		}
+		
+		
+		
 	}
 }

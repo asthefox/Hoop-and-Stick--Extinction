@@ -42,6 +42,8 @@
 		public const NUM_BLIMPS : int = 20;
 		
 		public var boss : Boss;
+		public var spawnedBoss : Boolean = false;
+		//public var reachedBoss : Boolean = false;
 		
 		public var sky : FlxSprite;
 		public var blimps : FlxGroup;
@@ -89,15 +91,13 @@
 			PlaceBuildings();
 			
 			AddElements();
-			
-			//TEMPORARY BOSS INSERTION
-			boss = new Boss(6000);
-			FlxG.state.add(boss);
 		}
 		
 		public function update() : void
 		{
 			poisons1.play("PlayAnimation");
+			
+			//if (!spawnedBoss && FlxG.state
 		}
 		
 		public function PlacePoisons() : void
@@ -341,6 +341,12 @@
 			FlxG.state.add(bowlingPins);
 			FlxG.state.add(shootingSituation);
 			//FlxG.state.add(wrapper);
+		}
+		
+		public function SpawnBoss() : void
+		{
+			boss = new Boss(6000);
+			FlxG.state.add(boss);
 		}
 		
 	}
