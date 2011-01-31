@@ -2,7 +2,6 @@
 {
 	import org.flixel.*; //Allows you to refer to flixel objects in your code
 	[SWF(width="640", height="480", backgroundColor="#000000")] //Set the size and color of the Flash file
-
 	
 	public class HoopAndStick extends FlxGame
 	{
@@ -21,7 +20,6 @@
 		{
 			//super(640, 480, PlayState, 1);
 			super(640, 480, TitleState, 1);
-			//super(640, 480, PlayState, 1);
 			//super(640, 480, TitleState, 1); // TODO: THIS IS THE REAL VERSION TO USE ONCE WE HAVE TITLE AND INTRO CUTSCENE
 			//StatePointer = 2; //TODO: DELETE THIS LATER. Just need it for skipping the first states
 			

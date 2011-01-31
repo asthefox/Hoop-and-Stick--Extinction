@@ -24,7 +24,6 @@
 		protected var gameOver:Boolean = false;
 
 		public var speedTrap : Boolean = false;
-
 		
 		override public function create():void
 		{	
@@ -34,6 +33,10 @@
 			add(wallR);
 			
 			level1 = new Level();
+			
+			//player = new Player(5100, 1000);
+			//hoop = new Hoop(5100, 1000);
+			
 			
 			player = new Player(100, 1200);
 			hoop = new Hoop(100, 1200);
@@ -83,7 +86,16 @@
 			wallR.collide(player);
 			wallR.collide(hoop);
 			
+			if (!reachedBoss && player.x > 5300)
+			{
+				reachedBoss = true;
+				var warningText : PositiveText = new PositiveText(player.x, 1150, "WARNING: \nAnti-Game Enforcement Approaching", 0xffffcccc);
+				warningText.size = 30;
+			}
+			
 			super.update();
+			
+			
 		}
 		
 		protected function CheckBowlingCollision() : void

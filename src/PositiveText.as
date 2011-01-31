@@ -17,8 +17,8 @@
 		
 		public override function update():void
 		{
-			alpha -= .01;
-			y -= 1;
+			alpha -= .004;
+			y -= 0.5;
 			if (alpha <= 0.03)
 			{
 				kill();
